@@ -27,14 +27,21 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
 
   const handleSearch = async () => {
+    if (!term || !location) return;
     setLoading(true);
-
-    const res = await fetch(
-      `/api/yelp/search?term=${encodeURIComponent(term)}&location=${encodeURIComponent(location)}`,
-    );
-    const json: YelpSearchResponse = await res.json();
-    setResults(json.businesses ?? []);
-    setLoading(false);
+    try {
+      const res = await fetch(
+        `/api/yelp/search?term=${encodeURIComponent(term)}&location=${encodeURIComponent(location)}`,
+      );
+      if (!res.ok) throw new Error('Yelp request failed');
+      const json: YelpSearchResponse = await res.json();
+      setResults(json.businesses ?? []);
+    } catch (err) {
+      console.error(err);
+      alert('Sorry, something went wrong. Try again in a moment.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
