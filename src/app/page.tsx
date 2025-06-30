@@ -71,23 +71,29 @@ export default function Home() {
         </button>
       </div>
 
-      {loading ? (
-        <ul className="space-y-3">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <li key={i}>
-              <RestaurantCardSkeleton />
-            </li>
-          ))}
-        </ul>
-      ) : (
+  {!loading && results.length === 0 ? (
+    <>
+      <div className="text-center py-20 text-gray-500">
+        <p className="text-5xl mb-4">🤷‍♀️</p>
+        <p>No restaurants found — try a different search.</p>
+      </div>
 
       <ul className="space-y-3">
-        <section className="grid gap-4
-                            grid-cols-1     /* mobile */
-                            sm:grid-cols-2 /* ≥640 px  */
-                            lg:grid-cols-3 /* ≥1024 px */
-                            ">
-          {results.map(biz => (
+        {Array.from({ length: 5 }).map((_, i) => (
+          <li key={i}>
+            <RestaurantCardSkeleton />
+          </li>
+        ))}
+      </ul>
+    </>
+  ) : (
+    <ul className="space-y-3">
+      <section className="grid gap-4
+                          grid-cols-1     /* mobile */
+                          sm:grid-cols-2 /* ≥640 px  */
+                          lg:grid-cols-3 /* ≥1024 px */
+                          ">
+        {results.map(biz => (
           <li key={biz.id}>
             <RestaurantCard
               key={biz.id}
@@ -98,10 +104,10 @@ export default function Home() {
               photoUrl={biz.image_url}
             />
           </li>
-          ))}
-        </section>
-      </ul>
-      )}
+        ))}
+      </section>
+    </ul>
+  )}
     </main>
   );
 }
