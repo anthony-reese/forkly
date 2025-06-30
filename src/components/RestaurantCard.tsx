@@ -1,7 +1,7 @@
 // src/components/RestaurantCard.tsx
 import Image from 'next/image';
 import { Star, StarHalf, Star as StarOutline } from 'lucide-react';
-import { priceColor } from '@/app/helpers/priceColor';
+import { priceColor } from '../app/helpers/priceColor';
 
 type Props = {
   name: string;
