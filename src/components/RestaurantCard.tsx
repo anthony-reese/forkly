@@ -1,6 +1,7 @@
 // src/components/RestaurantCard.tsx
 import Image from 'next/image';
 import { Star, StarHalf, Star as StarOutline } from 'lucide-react';
+import { priceColor } from '@/app/helpers/priceColor';
 
 type Props = {
   name: string;
@@ -49,10 +50,14 @@ export default function RestaurantCard({
       <div className="flex flex-col justify-center">
         <h3 className="font-semibold">{name}</h3>
         <p className="text-sm">
-          <Stars rating={rating} /> {rating.toFixed(1)} • {price ?? '?'} • {category}
+          <Stars rating={rating} /> {rating.toFixed(1)} • 
+          <span className={priceColor(price)}>{price ?? '?'}</span> 
+          &nbsp;• {category}
         </p>
         <p className="text-sm text-gray-600">
-          ⭐ {rating} • {price ?? '?'} • {category}
+          ⭐ {rating} • 
+          <span className={priceColor(price)}>{price ?? '?'}</span> 
+          &nbsp;• {category}
         </p>
       </div>
     </article>
