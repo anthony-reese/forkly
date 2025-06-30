@@ -82,9 +82,15 @@ export default function Home() {
       ) : (
 
       <ul className="space-y-3">
-        {results.map(biz => (
+        <section className="grid gap-4
+                            grid-cols-1     /* mobile */
+                            sm:grid-cols-2 /* ≥640 px  */
+                            lg:grid-cols-3 /* ≥1024 px */
+                            ">
+          {results.map(biz => (
           <li key={biz.id}>
             <RestaurantCard
+              key={biz.id}
               name={biz.name}
               rating={biz.rating}
               price={biz.price}
@@ -92,7 +98,8 @@ export default function Home() {
               photoUrl={biz.image_url}
             />
           </li>
-        ))}
+          ))}
+        </section>
       </ul>
       )}
     </main>
