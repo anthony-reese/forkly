@@ -1,5 +1,6 @@
 // src/components/RestaurantCard.tsx
 import Image from 'next/image';
+import { Star, StarHalf, Star as StarOutline } from 'lucide-react';
 
 type Props = {
   name: string;
@@ -8,6 +9,22 @@ type Props = {
   category: string;
   photoUrl?: string;
 };
+
+function Stars({ rating }: { rating: number }) {
+  const filled = Math.floor(rating);
+  const half   = rating % 1 >= 0.5 ? 1 : 0;
+  const empty  = 5 - filled - half;
+
+  return (
+    <span className="inline-flex">
+      {Array.from({ length: filled }).map((_, i) => <Star key={`f${i}`} size={16} />)}
+      {half === 1 && <StarHalf size={16} />}
+      {Array.from({ length: empty }).map((_, i) => (
+        <StarOutline key={`o${i}`} size={16} className="opacity-40" />
+      ))}
+    </span>
+  );
+}
 
 export default function RestaurantCard({
   name,
@@ -31,6 +48,9 @@ export default function RestaurantCard({
       {/* text */}
       <div className="flex flex-col justify-center">
         <h3 className="font-semibold">{name}</h3>
+        <p className="text-sm">
+          <Stars rating={rating} /> {rating.toFixed(1)} • {price ?? '?'} • {category}
+        </p>
         <p className="text-sm text-gray-600">
           ⭐ {rating} • {price ?? '?'} • {category}
         </p>
