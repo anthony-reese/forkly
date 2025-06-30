@@ -1,6 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import RestaurantCard from '@/components/RestaurantCard';
+import RestaurantCardSkeleton from '@/components/RestaurantCardSkeleton';
+
 
 /* ---- types ------------------------------------------------------------- */
 interface Business {
@@ -9,6 +12,7 @@ interface Business {
   rating: number;
   price?: string;
   categories: { title: string }[];
+  image_url: string;
 }
 interface YelpSearchResponse {
   businesses: Business[];
@@ -60,18 +64,30 @@ export default function Home() {
         </button>
       </div>
 
-      {loading && <p>Loading…</p>}
+      {loading ? (
+        <ul className="space-y-3">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <li key={i}>
+              <RestaurantCardSkeleton />
+            </li>
+          ))}
+        </ul>
+      ) : (
 
-      <ul className="space-y-2">
+      <ul className="space-y-3">
         {results.map(biz => (
-          <li key={biz.id} className="border p-3 rounded shadow-sm">
-            <p className="font-semibold">{biz.name}</p>
-            <p className="text-sm">
-              ⭐ {biz.rating} • {biz.price ?? '?'} • {biz.categories[0]?.title}
-            </p>
+          <li key={biz.id}>
+            <RestaurantCard
+              name={biz.name}
+              rating={biz.rating}
+              price={biz.price}
+              category={biz.categories[0]?.title ?? ''}
+              photoUrl={biz.image_url}
+            />
           </li>
         ))}
       </ul>
+      )}
     </main>
   );
 }
