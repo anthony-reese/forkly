@@ -48,7 +48,7 @@ export default function Home() {
     <main className="p-6 max-w-xl mx-auto space-y-4">
       <h1 className="text-3xl font-bold">Forkly</h1>
 
-      <div className="flex gap-2">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
         {/* 2. clearer placeholders */}
         <input
           value={term}
@@ -102,8 +102,7 @@ export default function Home() {
               rating={biz.rating}
               price={biz.price}
               category={biz.categories[0]?.title ?? ''}
-              photoUrl={biz.image_url}
-            />
+              photoUrl={biz.image_url} id={''}            />
           </li>
         ))}
       </section>
