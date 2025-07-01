@@ -2,14 +2,31 @@
 import Image from 'next/image';
 import { Star, StarHalf, Star as StarOutline } from 'lucide-react';
 import { priceColor } from '../app/helpers/priceColor';
+import { addToWishlist } from '@/lib/wishlist';
+import { useUser } from './AuthProvider';
 
 type Props = {
+  id: string;
   name: string;
   rating: number;
   price?: string;
   category: string;
   photoUrl?: string;
 };
+
+function SaveButton({ bizId }: { bizId: string }) {
+  const user = useUser();
+  if (!user) return null;
+
+  return (
+    <button
+      onClick={() => addToWishlist(user.uid, bizId)}
+      className="ml-auto text-xs text-indigo-600 hover:underline"
+    >
+      Save
+    </button>
+  );
+}
 
 function Stars({ rating }: { rating: number }) {
   const filled = Math.floor(rating);
@@ -28,6 +45,7 @@ function Stars({ rating }: { rating: number }) {
 }
 
 export default function RestaurantCard({
+  id,
   name,
   rating,
   price,
@@ -48,7 +66,11 @@ export default function RestaurantCard({
 
       {/* text */}
       <div className="flex-1 p-3 flex flex-col justify-between">
-        <h3 className="font-semibold text-gray-900 dark:text-gray-100">{name}</h3>
+        <div className="flex items-start">
+          <h3 className="font-semibold flex-1 text-gray-900 dark:text-gray-100">{name}</h3>
+          <SaveButton bizId={id} />
+        </div>
+        
         <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
           <Stars rating={rating} /> {rating.toFixed(1)} •  
           <span className={priceColor(price)}>{price ?? '?'}</span> 
