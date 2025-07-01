@@ -48,14 +48,9 @@ export default function RestaurantCard({
 
       {/* text */}
       <div className="flex-1 p-3 flex flex-col justify-between">
-        <h3 className="font-semibold">{name}</h3>
-        <p className="text-sm mt-1 text-gray-600">
-          <Stars rating={rating} /> {rating.toFixed(1)} • 
-          <span className={priceColor(price)}>{price ?? '?'}</span> 
-          &nbsp;• {category}
-        </p>
-        <p className="text-sm text-gray-600">
-          ⭐ {rating} • 
+        <h3 className="font-semibold text-gray-900 dark:text-gray-100">{name}</h3>
+        <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
+          <Stars rating={rating} /> {rating.toFixed(1)} •  
           <span className={priceColor(price)}>{price ?? '?'}</span> 
           &nbsp;• {category}
         </p>
