@@ -35,21 +35,21 @@ export default function RestaurantCard({
   photoUrl,
 }: Props) {
   return (
-    <article className="flex gap-4 rounded-xl border p-3 shadow hover:shadow-md transition">
+    <article className="flex flex-col h-full rounded-xl border shadow transition">
       {/* thumbnail */}
-      <div className="relative h-24 w-24 flex-shrink-0">
+      <div className="relative h-32 sm:h-40 w-full">
         <Image
           src={photoUrl ?? '/placeholder.png'}
           alt={name}
           fill
-          className="rounded-lg object-cover"
+          className="rounded-t-xl object-cover"
         />
       </div>
 
       {/* text */}
-      <div className="flex flex-col justify-center">
+      <div className="flex-1 p-3 flex flex-col justify-between">
         <h3 className="font-semibold">{name}</h3>
-        <p className="text-sm">
+        <p className="text-sm mt-1 text-gray-600">
           <Stars rating={rating} /> {rating.toFixed(1)} • 
           <span className={priceColor(price)}>{price ?? '?'}</span> 
           &nbsp;• {category}

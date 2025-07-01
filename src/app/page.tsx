@@ -88,10 +88,11 @@ export default function Home() {
     </>
   ) : (
     <ul className="space-y-3">
-      <section className="grid gap-4
+      <section className="grid gap-6
                           grid-cols-1     /* mobile */
                           sm:grid-cols-2 /* ≥640 px  */
                           lg:grid-cols-3 /* ≥1024 px */
+                          px-4 sm:px-0
                           ">
         {results.map(biz => (
           <li key={biz.id}>
