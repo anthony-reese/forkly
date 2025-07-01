@@ -4,7 +4,7 @@ import { collection, onSnapshot } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from '@/lib/firebase';
 import { useUser } from '@/components/AuthProvider';
-import _RestaurantCard from '@/components/RestaurantCard';
+import RestaurantCard from '@/components/RestaurantCard';
 
 export default function Wishlist() {
   const user = useUser();
