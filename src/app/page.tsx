@@ -97,12 +97,14 @@ export default function Home() {
         {results.map(biz => (
           <li key={biz.id}>
             <RestaurantCard
+              id={biz.id}
               key={biz.id}
               name={biz.name}
               rating={biz.rating}
               price={biz.price}
               category={biz.categories[0]?.title ?? ''}
-              photoUrl={biz.image_url} id={''}            />
+              photoUrl={biz.image_url}
+            />
           </li>
         ))}
       </section>

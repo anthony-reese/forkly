@@ -17,11 +17,10 @@ type Props = {
 function SaveButton({ bizId }: { bizId: string }) {
   const user = useUser();
   if (!user) return null;
-
   return (
     <button
       onClick={() => addToWishlist(user.uid, bizId)}
-      className="ml-auto text-xs text-indigo-600 hover:underline"
+      className="ml-2 text-xs text-indigo-600 hover:underline"
     >
       Save
     </button>
@@ -67,13 +66,17 @@ export default function RestaurantCard({
       {/* text */}
       <div className="flex-1 p-3 flex flex-col justify-between">
         <div className="flex items-start">
-          <h3 className="font-semibold flex-1 text-gray-900 dark:text-gray-100">{name}</h3>
+          <h3 className="font-semibold flex-1 text-gray-900 dark:text-gray-100">
+            {name}
+          </h3>
           <SaveButton bizId={id} />
         </div>
-        
+
         <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
-          <Stars rating={rating} /> {rating.toFixed(1)} •  
-          <span className={priceColor(price)}>{price ?? '?'}</span> 
+          <Stars rating={rating} /> {rating.toFixed(1)} •
+          <span className={priceColor(price) + ' dark:opacity-90'}>
+            {price ?? '?'}
+          </span>
           &nbsp;• {category}
         </p>
       </div>
