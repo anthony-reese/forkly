@@ -65,7 +65,7 @@ export default function Home() {
         <button
           onClick={handleSearch}
           disabled={loading || !term || !location}
-          className="bg-indigo-600 text-white px-4 rounded disabled:opacity-40"
+          className="h-10 bg-indigo-600 text-white px-4 rounded disabled:opacity-40"
         >
           Search
         </button>
