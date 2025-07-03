@@ -12,7 +12,7 @@
 				"auth": {
 					"type": "bearer",
 					"bearer": {
-						"token": "xVkYksXsl4_7XA1ObPrUN9KWFO83T9pfl-dtYmBWF_7S-mnwYQ8SpJ5gtp3eCQVhrqmTeA7P6to0kVw_dwLndkSqacjWzn_0CglyP1Z9F4PYPYEL3_ZFKiRi1hRgaHYx"
+						"token": "{{YELP_API_KEY}}"
 					}
 				},
 				"method": "GET",
@@ -54,7 +54,7 @@
 				"auth": {
 					"type": "bearer",
 					"bearer": {
-						"token": "xVkYksXsl4_7XA1ObPrUN9KWFO83T9pfl-dtYmBWF_7S-mnwYQ8SpJ5gtp3eCQVhrqmTeA7P6to0kVw_dwLndkSqacjWzn_0CglyP1Z9F4PYPYEL3_ZFKiRi1hRgaHYx"
+						"token": "{{YELP_API_KEY}}\n"
 					}
 				},
 				"method": "GET",
@@ -92,7 +92,7 @@
 				"auth": {
 					"type": "bearer",
 					"bearer": {
-						"token": "xVkYksXsl4_7XA1ObPrUN9KWFO83T9pfl-dtYmBWF_7S-mnwYQ8SpJ5gtp3eCQVhrqmTeA7P6to0kVw_dwLndkSqacjWzn_0CglyP1Z9F4PYPYEL3_ZFKiRi1hRgaHYx"
+						"token": "{{YELP_API_KEY}}"
 					}
 				},
 				"method": "GET",
@@ -134,7 +134,7 @@
 				"auth": {
 					"type": "bearer",
 					"bearer": {
-						"token": "xVkYksXsl4_7XA1ObPrUN9KWFO83T9pfl-dtYmBWF_7S-mnwYQ8SpJ5gtp3eCQVhrqmTeA7P6to0kVw_dwLndkSqacjWzn_0CglyP1Z9F4PYPYEL3_ZFKiRi1hRgaHYx"
+						"token": "{{YELP_API_KEY}}"
 					}
 				},
 				"method": "GET",
@@ -180,7 +180,7 @@
 				"auth": {
 					"type": "bearer",
 					"bearer": {
-						"token": "xVkYksXsl4_7XA1ObPrUN9KWFO83T9pfl-dtYmBWF_7S-mnwYQ8SpJ5gtp3eCQVhrqmTeA7P6to0kVw_dwLndkSqacjWzn_0CglyP1Z9F4PYPYEL3_ZFKiRi1hRgaHYx"
+						"token": "{{YELP_API_KEY}}"
 					}
 				},
 				"method": "GET",
@@ -222,7 +222,7 @@
 				"auth": {
 					"type": "bearer",
 					"bearer": {
-						"token": "xVkYksXsl4_7XA1ObPrUN9KWFO83T9pfl-dtYmBWF_7S-mnwYQ8SpJ5gtp3eCQVhrqmTeA7P6to0kVw_dwLndkSqacjWzn_0CglyP1Z9F4PYPYEL3_ZFKiRi1hRgaHYx"
+						"token": "{{YELP_API_KEY}}"
 					}
 				},
 				"method": "GET",
