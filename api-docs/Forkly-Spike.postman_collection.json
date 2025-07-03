@@ -1,0 +1,270 @@
+{
+	"info": {
+		"_postman_id": "e5174771-5984-43f6-bd8b-d6cc5434a101",
+		"name": "Forkly-Spike",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "18221544"
+	},
+	"item": [
+		{
+			"name": "price",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "xVkYksXsl4_7XA1ObPrUN9KWFO83T9pfl-dtYmBWF_7S-mnwYQ8SpJ5gtp3eCQVhrqmTeA7P6to0kVw_dwLndkSqacjWzn_0CglyP1Z9F4PYPYEL3_ZFKiRi1hRgaHYx"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.yelp.com/v3/businesses/search?term=sushi&location=tokyo&price=1,2",
+					"protocol": "https",
+					"host": [
+						"api",
+						"yelp",
+						"com"
+					],
+					"path": [
+						"v3",
+						"businesses",
+						"search"
+					],
+					"query": [
+						{
+							"key": "term",
+							"value": "sushi"
+						},
+						{
+							"key": "location",
+							"value": "tokyo"
+						},
+						{
+							"key": "price",
+							"value": "1,2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "business",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "xVkYksXsl4_7XA1ObPrUN9KWFO83T9pfl-dtYmBWF_7S-mnwYQ8SpJ5gtp3eCQVhrqmTeA7P6to0kVw_dwLndkSqacjWzn_0CglyP1Z9F4PYPYEL3_ZFKiRi1hRgaHYx"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.yelp.com/v3/businesses/search?term=sushi&location=tokyo",
+					"protocol": "https",
+					"host": [
+						"api",
+						"yelp",
+						"com"
+					],
+					"path": [
+						"v3",
+						"businesses",
+						"search"
+					],
+					"query": [
+						{
+							"key": "term",
+							"value": "sushi"
+						},
+						{
+							"key": "location",
+							"value": "tokyo"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "categories",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "xVkYksXsl4_7XA1ObPrUN9KWFO83T9pfl-dtYmBWF_7S-mnwYQ8SpJ5gtp3eCQVhrqmTeA7P6to0kVw_dwLndkSqacjWzn_0CglyP1Z9F4PYPYEL3_ZFKiRi1hRgaHYx"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.yelp.com/v3/businesses/search?term=sushi&location=tokyo&categories=thai,ramen",
+					"protocol": "https",
+					"host": [
+						"api",
+						"yelp",
+						"com"
+					],
+					"path": [
+						"v3",
+						"businesses",
+						"search"
+					],
+					"query": [
+						{
+							"key": "term",
+							"value": "sushi"
+						},
+						{
+							"key": "location",
+							"value": "tokyo"
+						},
+						{
+							"key": "categories",
+							"value": "thai,ramen"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "offset",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "xVkYksXsl4_7XA1ObPrUN9KWFO83T9pfl-dtYmBWF_7S-mnwYQ8SpJ5gtp3eCQVhrqmTeA7P6to0kVw_dwLndkSqacjWzn_0CglyP1Z9F4PYPYEL3_ZFKiRi1hRgaHYx"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.yelp.com/v3/businesses/search?term=sushi&location=tokyo&limit=20&offset=20",
+					"protocol": "https",
+					"host": [
+						"api",
+						"yelp",
+						"com"
+					],
+					"path": [
+						"v3",
+						"businesses",
+						"search"
+					],
+					"query": [
+						{
+							"key": "term",
+							"value": "sushi"
+						},
+						{
+							"key": "location",
+							"value": "tokyo"
+						},
+						{
+							"key": "limit",
+							"value": "20"
+						},
+						{
+							"key": "offset",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sort_by",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "xVkYksXsl4_7XA1ObPrUN9KWFO83T9pfl-dtYmBWF_7S-mnwYQ8SpJ5gtp3eCQVhrqmTeA7P6to0kVw_dwLndkSqacjWzn_0CglyP1Z9F4PYPYEL3_ZFKiRi1hRgaHYx"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.yelp.com/v3/businesses/search?term=sushi&location=tokyo&sort_by=rating",
+					"protocol": "https",
+					"host": [
+						"api",
+						"yelp",
+						"com"
+					],
+					"path": [
+						"v3",
+						"businesses",
+						"search"
+					],
+					"query": [
+						{
+							"key": "term",
+							"value": "sushi"
+						},
+						{
+							"key": "location",
+							"value": "tokyo"
+						},
+						{
+							"key": "sort_by",
+							"value": "rating"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "open_now",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "xVkYksXsl4_7XA1ObPrUN9KWFO83T9pfl-dtYmBWF_7S-mnwYQ8SpJ5gtp3eCQVhrqmTeA7P6to0kVw_dwLndkSqacjWzn_0CglyP1Z9F4PYPYEL3_ZFKiRi1hRgaHYx"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.yelp.com/v3/businesses/search?term=sushi&location=tokyo&&limit=20&open_now=true",
+					"protocol": "https",
+					"host": [
+						"api",
+						"yelp",
+						"com"
+					],
+					"path": [
+						"v3",
+						"businesses",
+						"search"
+					],
+					"query": [
+						{
+							"key": "term",
+							"value": "sushi"
+						},
+						{
+							"key": "location",
+							"value": "tokyo"
+						},
+						{
+							"key": null,
+							"value": null
+						},
+						{
+							"key": "limit",
+							"value": "20"
+						},
+						{
+							"key": "open_now",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
