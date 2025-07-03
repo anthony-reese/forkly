@@ -46,7 +46,7 @@ export default function Home() {
 
   return (
     <main className="p-6 max-w-xl mx-auto space-y-4">
-      <h1 className="text-3xl font-bold">Forkly</h1>
+      <h1 className="text-3xl font-bold">Forkly 🍴</h1>
 
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
         {/* 2. clearer placeholders */}
