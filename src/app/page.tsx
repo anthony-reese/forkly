@@ -16,24 +16,29 @@ interface Business {
 export default function Home() {
   const [results, setResults] = useState<Business[]>([]);
   const [loading, setLoading] = useState(false);
+  const [lastQuery, setLastQuery] = useState('restaurants');
 
   async function handleSearch(term: string, loc: string) {
-    setLoading(true);
-    try {
-      const data = await searchYelp({ term, location: loc });
-      setResults(data.businesses ?? []);
-    } finally {
-      setLoading(false);
+  setLoading(true);
+  try {
+    const q = term.trim() || 'restaurants';
+    const data = await searchYelp({ term: q, location: loc });
+    setResults(data.businesses ?? []);
+    setLastQuery(q);
+  } finally {
+    setLoading(false);
     }
   }
 
   async function handleLocate(lat: number, lon: number, term: string) {
-    setLoading(true);
-    try {
-      const data = await searchYelp({ term: term || 'restaurants', latitude: lat, longitude: lon });
-      setResults(data.businesses ?? []);
-    } finally {
-      setLoading(false);
+  setLoading(true);
+  try {
+    const q = term.trim() || 'restaurants';
+    const data = await searchYelp({ term: q, latitude: lat, longitude: lon });
+    setResults(data.businesses ?? []);
+    setLastQuery(q);
+  } finally {
+    setLoading(false);
     }
   }
 
@@ -45,7 +50,7 @@ export default function Home() {
 
       {!loading && results.length === 0 && (
         <p className="text-center py-10 text-gray-500">
-          No restaurants found nearby — try a different search or city.
+          No nearby results for “{lastQuery}”. Try another term.
         </p>
       )}
 
