@@ -19,13 +19,13 @@ export default function SearchBar({
         value={term}
         onChange={e => setTerm(e.target.value)}
         placeholder="What?"
-        className="h-10 flex-1 border p-2 rounded"
+        className="h-10 flex-1 border p-2 rounded bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100"
       />
       <input
         value={location}
         onChange={e => setLocation(e.target.value)}
         placeholder="Where?"
-        className="h-10 flex-1 border p-2 rounded"
+        className="h-10 flex-1 border p-2 rounded bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100"
       />
       <button
         onClick={() => onSearch(term, location)}
