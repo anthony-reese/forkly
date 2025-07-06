@@ -30,7 +30,7 @@ export default function Home() {
   async function handleLocate(lat: number, lon: number, term: string) {
     setLoading(true);
     try {
-      const data = await searchYelp({ term: term || 'food', latitude: lat, longitude: lon });
+      const data = await searchYelp({ term: term || 'restaurants', latitude: lat, longitude: lon });
       setResults(data.businesses ?? []);
     } finally {
       setLoading(false);
@@ -42,6 +42,12 @@ export default function Home() {
       <SearchBar onSearch={handleSearch} onLocate={handleLocate} />
 
       {loading && <p>Loading…</p>}
+
+      {!loading && results.length === 0 && (
+        <p className="text-center py-10 text-gray-500">
+          No restaurants found nearby — try a different search or city.
+        </p>
+      )}
 
       <section className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {results.map(biz => (

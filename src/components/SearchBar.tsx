@@ -34,10 +34,15 @@ export default function SearchBar({
         Search
       </button>
       <button
-        onClick={async () => {
-          await request();
-          if (coords) onLocate(coords.latitude, coords.longitude, term);
-        }}
+        onClick={
+            async function handleNearMe() {
+                if (!coords) {
+                  await request();
+                }
+                if (coords) 
+                  onLocate(coords.latitude, coords.longitude, term);
+            }
+        }
         className="h-10 px-3 bg-emerald-600 text-white rounded"
       >
         Near me
