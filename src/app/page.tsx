@@ -2,6 +2,7 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useCallback } from 'react';
+import { Suspense } from 'react';
 import SearchBar from '@/components/SearchBar';
 import RestaurantCard from '@/components/RestaurantCard';
 import { searchYelp } from '@/lib/searchClient';
@@ -115,72 +116,74 @@ export default function Home() {
   };
 
   return (
-    <main className="p-6 max-w-4xl mx-auto space-y-6">
-      <SearchBar 
-        value={term} 
-        locationValue={location}
-        onSearch={handleSearch} 
-        onLocate={handleLocate} />
+    <Suspense fallback={<div>Loading...</div>}>
+      <main className="p-6 max-w-4xl mx-auto space-y-6">
+        <SearchBar 
+          value={term} 
+          locationValue={location}
+          onSearch={handleSearch} 
+          onLocate={handleLocate} />
 
-      {/* Price filter chips */}
-      <div className="flex gap-2">
-        {priceOptions.map(option => (
-          <button
-            key={option.value}
-            className={`px-3 py-1 rounded-full border text-sm ${
-              selectedPrices.includes(option.value)
-                ? 'bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900'
-                : 'bg-white text-black dark:bg-gray-900 dark:text-white'
-            }`}
-            onClick={() => togglePrice(option.value)}
-          >
-            {option.label}
-          </button>
-        ))}
-      </div>
+        {/* Price filter chips */}
+        <div className="flex gap-2">
+          {priceOptions.map(option => (
+            <button
+              key={option.value}
+              className={`px-3 py-1 rounded-full border text-sm ${
+                selectedPrices.includes(option.value)
+                  ? 'bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900'
+                  : 'bg-white text-black dark:bg-gray-900 dark:text-white'
+              }`}
+              onClick={() => togglePrice(option.value)}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
 
-      {/* Category filter chips */}
-      <div className="flex gap-2">
-        {categoryOptions.map(option => (
-          <button
-            key={option.value}
-            className={`px-3 py-1 rounded-full border text-sm ${
-              selectedCategories.includes(option.value)
-                ? 'bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900'
-                : 'bg-white text-black dark:bg-gray-900 dark:text-white'
-            }`}
-            onClick={() => toggleCategory(option.value)}
-          >
-            {option.label}
-          </button>
-        ))}
-      </div>
+        {/* Category filter chips */}
+        <div className="flex gap-2">
+          {categoryOptions.map(option => (
+            <button
+              key={option.value}
+              className={`px-3 py-1 rounded-full border text-sm ${
+                selectedCategories.includes(option.value)
+                  ? 'bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900'
+                  : 'bg-white text-black dark:bg-gray-900 dark:text-white'
+              }`}
+              onClick={() => toggleCategory(option.value)}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
 
-      {loading && <p>Loading…</p>}
+        {loading && <p>Loading…</p>}
 
-      {!loading && results.length === 0 && (
-        <p className="text-center py-10 text-gray-500">
-          No nearby results for “{lastQuery}”
-          {(!lastQuery || lastQuery === 'restaurants') && !selectedPrices.length && !selectedCategories.length
-            ? ' near your location'
-            : ''}
-          . Try another term.
-        </p>
-      )}
+        {!loading && results.length === 0 && (
+          <p className="text-center py-10 text-gray-500">
+            No nearby results for “{lastQuery}”
+            {(!lastQuery || lastQuery === 'restaurants') && !selectedPrices.length && !selectedCategories.length
+              ? ' near your location'
+              : ''}
+            . Try another term.
+          </p>
+        )}
 
-      <section className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {results.map(biz => (
-          <RestaurantCard
-            key={biz.id}
-            id={biz.id}
-            name={biz.name}
-            rating={biz.rating}
-            price={biz.price}
-            category={biz.categories[0]?.title ?? ''}
-            photoUrl={biz.image_url}
-          />
-        ))}
-      </section>
-    </main>
+        <section className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          {results.map(biz => (
+            <RestaurantCard
+              key={biz.id}
+              id={biz.id}
+              name={biz.name}
+              rating={biz.rating}
+              price={biz.price}
+              category={biz.categories[0]?.title ?? ''}
+              photoUrl={biz.image_url}
+            />
+          ))}
+        </section>
+      </main>
+    </Suspense>
   );
 }
