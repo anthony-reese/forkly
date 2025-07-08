@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import { Star, StarHalf, Star as StarOutline } from 'lucide-react';
 import { priceColor } from '../app/helpers/priceColor';
+import { toast } from 'react-hot-toast';
 import { addToWishlist } from '@/lib/wishlist';
 import { useUser } from './AuthProvider';
 
@@ -17,9 +18,20 @@ type Props = {
 function SaveButton({ bizId }: { bizId: string }) {
   const user = useUser();
   if (!user) return null;
+
+  const handleSave = async () => {
+    try {
+      await addToWishlist(user.uid, bizId);   // ← arguments here
+      toast.success('Added to wishlist!');     // ← toast here
+    } catch (err) {
+      toast.error('Could not save, try again.');
+      console.error(err);
+    }
+  };
+
   return (
     <button
-      onClick={() => addToWishlist(user.uid, bizId)}
+      onClick={handleSave}
       className="ml-2 text-xs text-indigo-600 hover:underline"
     >
       Save
