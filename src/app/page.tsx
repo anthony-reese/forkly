@@ -1,11 +1,13 @@
 'use client';
+import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { useCallback } from 'react';
-import { Suspense } from 'react';
 import SearchBar from '@/components/SearchBar';
 import RestaurantCard from '@/components/RestaurantCard';
 import { searchYelp } from '@/lib/searchClient';
+
+/* ------------------------------------------------------------------ */
+/*  Type helpers                                                      */
+/* ------------------------------------------------------------------ */
 
 interface Business {
   id: string;
@@ -13,177 +15,130 @@ interface Business {
   rating: number;
   price?: string;
   image_url?: string;
-  categories: { title: string; alias: string }[];
+  categories: { title: string }[];
 }
 
-const priceOptions = [
-  { label: '$', value: '1' },
-  { label: '$$', value: '2' },
-  { label: '$$$', value: '3' },
-];
+interface YelpSearchOpts {
+  location?: string;
+  latitude?: number;
+  longitude?: number;
+  price?: string;
+  categories?: string;
+}
 
-const categoryOptions = [
-  { label: 'Ramen', value: 'ramen' },
-  { label: 'Coffee', value: 'coffee' },
-  { label: 'Pizza', value: 'pizza' },
-];
+/* ------------------------------------------------------------------ */
+/*  Component                                                         */
+/* ------------------------------------------------------------------ */
 
-export default function Home() {
-  const router = useRouter();
-  const params = useSearchParams();
-  const [results, setResults] = useState<Business[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [lastQuery, setLastQuery] = useState('restaurants');
-  const [term, setTerm] = useState('');
-  const [location, setLocation] = useState('');
-  const [selectedPrices, setSelectedPrices] = useState<string[]>([]);
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+export default function HomePage() {
+  const router        = useRouter();
+  const urlParams     = useSearchParams();
 
-  type YelpSearchParams = {
-    term: string;
-    location?: string;
-    latitude?: number;
-    longitude?: number;
-    price?: string;
-    categories?: string;
-  };
+  // ---------------- state ----------------
+  const [results, setResults]                 = useState<Business[]>([]);
+  const [loading, setLoading]                 = useState(false);
+  const [lastQuery, setLastQuery]             = useState('restaurants');
+  const [selectedPrices, setSelectedPrices]   = useState<string[]>([]);
+  const [selectedCats,  setSelectedCats]      = useState<string[]>([]);
 
-  const fetchResults = useCallback(
-    async (
-      term: string,
-      loc?: string,
-      lat?: number,
-      lon?: number
-    ) => {
-      setLoading(true);
-      try {
-        const q = term.trim() || 'restaurants';
-        const params: YelpSearchParams = { term: q };
-        if (loc) params.location = loc;
-        if (lat && lon) {
-          params.latitude = lat;
-          params.longitude = lon;
-        }
-        if (selectedPrices.length) params.price = selectedPrices.join(',');
-        if (selectedCategories.length) params.categories = selectedCategories.join(',');
+  // ---------------- helpers -------------
+  async function fetchResults(query: string, opts: YelpSearchOpts = {}) {
+    setLoading(true);
+    try {
+      const data = await searchYelp({
+        term: query,
+        ...opts,
+        price: selectedPrices.join(',') || undefined,
+        categories: selectedCats.join(',') || undefined,
+      });
+      setResults(data.businesses ?? []);
+      setLastQuery(query);
+    } finally {
+      setLoading(false);
+    }
+  }
 
-        const data = await searchYelp(params);
-        setResults(data.businesses ?? []);
-        setLastQuery(q);
-      } finally {
-        setLoading(false);
-      }
-    },
-    [selectedPrices, selectedCategories]
-  );
-
-  useEffect(() => {
-    fetchResults(lastQuery);
-  }, [selectedPrices, selectedCategories, fetchResults, lastQuery]);
-  
-  useEffect(() => {
-    setTerm(params.get('term') ?? '');
-    setLocation(params.get('location') ?? '');
-  }, [params]);
-
+  // ---------------- search handlers -----
   async function handleSearch(term: string, loc: string) {
-    router.replace(
-      `/?term=${encodeURIComponent(term)}&location=${encodeURIComponent(loc)}`
-    );
-    setTerm(term);
-    setLocation(loc);
-    await fetchResults(term, loc);
+    const q = term.trim() || 'restaurants';
+    router.replace(`/?term=${encodeURIComponent(q)}&location=${encodeURIComponent(loc)}`);
+    await fetchResults(q, { location: loc });
   }
 
   async function handleLocate(lat: number, lon: number, term: string) {
-    await fetchResults(term, undefined, lat, lon);
+    const q = term.trim() || 'restaurants';
+    await fetchResults(q, { latitude: lat, longitude: lon });
   }
 
-  const togglePrice = async (value: string) => {
-    const newPrices = selectedPrices.includes(value)
-      ? selectedPrices.filter(v => v !== value)
-      : [...selectedPrices, value];
-    setSelectedPrices(newPrices);
-    await fetchResults(lastQuery);
-  };
+  // ---------------- filter toggles ------
+  function toggle(arr: string[], value: string, setter: (a: string[]) => void) {
+    setter(arr.includes(value) ? arr.filter(v => v !== value) : [...arr, value]);
+  }
+  const togglePrice    = (v: string) => toggle(selectedPrices, v, setSelectedPrices);
+  const toggleCategory = (v: string) => toggle(selectedCats,  v, setSelectedCats);
 
-  const toggleCategory = async (value: string) => {
-    const newCategories = selectedCategories.includes(value)
-      ? selectedCategories.filter(v => v !== value)
-      : [...selectedCategories, value];
-    setSelectedCategories(newCategories);
-    await fetchResults(lastQuery);
-  };
+  /* re-run when filters change */
+  useEffect(() => {
+    fetchResults(lastQuery);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedPrices, selectedCats]);
+
+  /* ---------------------------------------------------------------- */
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <main className="p-6 max-w-4xl mx-auto space-y-6">
-        <SearchBar 
-          value={term} 
-          locationValue={location}
-          onSearch={handleSearch} 
-          onLocate={handleLocate} />
+    <main className="p-6 max-w-4xl mx-auto space-y-6">
+      {/* search bar */}
+      <SearchBar onSearch={handleSearch} onLocate={handleLocate}
+                 initialTerm={urlParams.get('term') ?? ''}
+                 initialLocation={urlParams.get('location') ?? ''} />
 
-        {/* Price filter chips */}
-        <div className="flex gap-2">
-          {priceOptions.map(option => (
-            <button
-              key={option.value}
-              className={`px-3 py-1 rounded-full border text-sm ${
-                selectedPrices.includes(option.value)
-                  ? 'bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900'
-                  : 'bg-white text-black dark:bg-gray-900 dark:text-white'
-              }`}
-              onClick={() => togglePrice(option.value)}
-            >
-              {option.label}
-            </button>
-          ))}
-        </div>
+      {/* price chips */}
+      <div className="flex gap-2 pt-2">
+        {['1', '2', '3'].map(p => (
+          <button
+            key={p}
+            onClick={() => togglePrice(p)}
+            className={`px-3 py-1 rounded border
+                        ${selectedPrices.includes(p)
+                          ? 'bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900'
+                          : 'bg-gray-200 dark:bg-gray-700'}`}>
+            {'$'.repeat(Number(p))}
+          </button>
+        ))}
+        {['thai', 'pizza', 'coffee'].map(c => (
+          <button
+            key={c}
+            onClick={() => toggleCategory(c)}
+            className={`px-3 py-1 rounded border capitalize
+                        ${selectedCats.includes(c)
+                          ? 'bg-indigo-600 text-white'
+                          : 'bg-gray-200 dark:bg-gray-700'}`}>
+            {c}
+          </button>
+        ))}
+      </div>
 
-        {/* Category filter chips */}
-        <div className="flex gap-2">
-          {categoryOptions.map(option => (
-            <button
-              key={option.value}
-              className={`px-3 py-1 rounded-full border text-sm ${
-                selectedCategories.includes(option.value)
-                  ? 'bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900'
-                  : 'bg-white text-black dark:bg-gray-900 dark:text-white'
-              }`}
-              onClick={() => toggleCategory(option.value)}
-            >
-              {option.label}
-            </button>
-          ))}
-        </div>
+      {/* results */}
+      {loading && <p>Loading…</p>}
+      {!loading && results.length === 0 && (
+        <p className="text-center py-10 text-gray-500">
+          No results for “{lastQuery}”.
+        </p>
+      )}
 
-        {loading && <p>Loading…</p>}
-
-        {!loading && results.length === 0 && (
-          <p className="text-center py-10 text-gray-500">
-            No nearby results for “{lastQuery}”
-            {(!lastQuery || lastQuery === 'restaurants') && !selectedPrices.length && !selectedCategories.length
-              ? ' near your location'
-              : ''}
-            . Try another term.
-          </p>
-        )}
-
-        <section className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          {results.map(biz => (
-            <RestaurantCard
-              key={biz.id}
-              id={biz.id}
-              name={biz.name}
-              rating={biz.rating}
-              price={biz.price}
-              category={biz.categories[0]?.title ?? ''}
-              photoUrl={biz.image_url}
-            />
-          ))}
-        </section>
-      </main>
-    </Suspense>
+      <section className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        {results.map(biz => (
+          <RestaurantCard
+            key={biz.id}
+            id={biz.id}
+            name={biz.name}
+            rating={biz.rating}
+            price={biz.price}
+            category={biz.categories?.[0]?.title ?? ''}
+            photoUrl={biz.image_url}
+          />
+        ))}
+      </section>
+    </main>
   );
 }
