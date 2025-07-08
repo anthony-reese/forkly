@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import SearchBar from '@/components/SearchBar';
 import RestaurantCard from '@/components/RestaurantCard';
 import { searchYelp } from '@/lib/searchClient';
+import { Suspense } from 'react';
 
 /* ------------------------------------------------------------------ */
 /*  Type helpers                                                      */
@@ -86,6 +87,7 @@ export default function HomePage() {
   /* ---------------------------------------------------------------- */
 
   return (
+    <Suspense fallback={<div>Loading...</div>}>
     <main className="p-6 max-w-4xl mx-auto space-y-6">
       {/* search bar */}
       <SearchBar onSearch={handleSearch} onLocate={handleLocate}
@@ -140,5 +142,6 @@ export default function HomePage() {
         ))}
       </section>
     </main>
+    </Suspense>
   );
 }
