@@ -1,4 +1,5 @@
 'use client';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useCallback } from 'react';
 import SearchBar from '@/components/SearchBar';
@@ -27,9 +28,13 @@ const categoryOptions = [
 ];
 
 export default function Home() {
+  const router = useRouter();
+  const params = useSearchParams();
   const [results, setResults] = useState<Business[]>([]);
   const [loading, setLoading] = useState(false);
   const [lastQuery, setLastQuery] = useState('restaurants');
+  const [term, setTerm] = useState('');
+  const [location, setLocation] = useState('');
   const [selectedPrices, setSelectedPrices] = useState<string[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
@@ -75,7 +80,17 @@ export default function Home() {
     fetchResults(lastQuery);
   }, [selectedPrices, selectedCategories, fetchResults, lastQuery]);
   
+  useEffect(() => {
+    setTerm(params.get('term') ?? '');
+    setLocation(params.get('location') ?? '');
+  }, [params]);
+
   async function handleSearch(term: string, loc: string) {
+    router.replace(
+      `/?term=${encodeURIComponent(term)}&location=${encodeURIComponent(loc)}`
+    );
+    setTerm(term);
+    setLocation(loc);
     await fetchResults(term, loc);
   }
 
@@ -101,7 +116,11 @@ export default function Home() {
 
   return (
     <main className="p-6 max-w-4xl mx-auto space-y-6">
-      <SearchBar onSearch={handleSearch} onLocate={handleLocate} />
+      <SearchBar 
+        value={term} 
+        locationValue={location}
+        onSearch={handleSearch} 
+        onLocate={handleLocate} />
 
       {/* Price filter chips */}
       <div className="flex gap-2">
