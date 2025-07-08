@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import SignInButton from '@/components/SignInButton';
 import { useUser } from '@/components/AuthProvider';
+import MobileNav from '@/components/MobileNav';
 
 export default function Header() {
   const user = useUser();
@@ -12,7 +13,7 @@ export default function Header() {
         Forkly
       </Link>
 
-      <nav className="flex items-center gap-4">
+      <nav className="hidden sm:flex items-center gap-4">
         {user && (
           <Link href="/wishlist" className="text-sm hover:underline">
             Wishlist
@@ -20,6 +21,9 @@ export default function Header() {
         )}
         <SignInButton />
       </nav>
+      <div className="sm:hidden">
+        <MobileNav />
+      </div>
     </header>
   );
 }
