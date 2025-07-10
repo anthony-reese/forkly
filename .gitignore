@@ -40,3 +40,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# misc
+pglite-debug.log
+git
+dist/
+lib/
+pglite-debug.log
