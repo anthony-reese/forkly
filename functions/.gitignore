@@ -8,3 +8,14 @@ typings/
 # Node.js dependency directory
 node_modules/
 *.local
+
+# env files (can opt-in for committing if needed)
+.env*
+.env.local
+
+# misc
+pglite-debug.log
+git
+dist/
+lib/
+pglite-debug.log
