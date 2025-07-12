@@ -1,19 +1,17 @@
 {
   "compilerOptions": {
-    "jsx": "react-jsx",
-    "jsxImportSource": "react",
-    "module": "NodeNext",
-    "esModuleInterop": true,
-    "moduleResolution": "nodenext",
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
+    "target": "es2020",
+    "module": "commonjs",
+    "lib": ["es2020"],
+    "moduleResolution": "node",
     "outDir": "lib",
-    "rootDir": "src",
-    "sourceMap": true,
+    "esModuleInterop": true,
     "strict": true,
-    "target": "es2017"
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
   },
-  "compileOnSave": true,
   "include": [
     "src"
   ]
