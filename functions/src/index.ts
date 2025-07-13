@@ -9,18 +9,11 @@ import React from 'react';
 import webpush from 'web-push';
 import { Expo } from 'expo-server-sdk';
 
+const resendApiKey = defineSecret('RESEND_KEY');
 const webPushPublicKey = defineSecret('WEB_PUSH_PUBLIC_KEY');
 const webPushPrivateKey = defineSecret('WEB_PUSH_PRIVATE_KEY');
 
 admin.initializeApp();
-
-const resendApiKey = defineSecret('RESEND_KEY');
-
-webpush.setVapidDetails(
-  'mailto:your-email@example.com', // Which email should go here
-  webPushPublicKey.value(),
-  webPushPrivateKey.value()
-);
 
 const expo = new Expo();
 
@@ -32,14 +25,16 @@ export const emailPromo = onDocumentCreated(
   },
   async (event) => {
     const { uid, bizId } = event.params;
+
+    webpush.setVapidDetails(
+      'mailto:support@forkly.app',
+      webPushPublicKey.value(),
+      webPushPrivateKey.value()
+    );
+
     const itemRef = admin.firestore().doc(`wishlists/${uid}/items/${bizId}`);
     const itemSnap = await itemRef.get();
     const lastNotified = itemSnap.get('lastNotified');
-
-    if (lastNotified) {
-      console.log(`Already notified for ${bizId}, skipping.`);
-      return;
-    }
 
     const userDoc = await admin.firestore().doc(`users/${uid}`).get();
     const name = userDoc.get('name') || 'Friend';
@@ -49,21 +44,26 @@ export const emailPromo = onDocumentCreated(
 
     const resend = new Resend(resendApiKey.value());
 
+    if (lastNotified) {
+      console.log(`Already notified for ${bizId}, skipping.`);
+      return;
+    }
+
     try {
       if (email) {
-      const emailHtml = await render(React.createElement(PromoEmail, { name, bizName: bizId }));
-      await resend.emails.send({
-        from: 'Forkly <promos@forkly.app>',
-        to: email,
-        subject: `🎉 New deal on ${bizId}`,
-        html: emailHtml,
-      });
-      console.log(`Promo sent to ${email} for ${bizId}`);
+        const emailHtml = await render(React.createElement(PromoEmail, { name, bizName: bizId }));
+        await resend.emails.send({
+          from: 'Forkly <promos@forkly.app>',
+          to: email,
+          subject: `🎉 New deal on ${bizId}`,
+          html: emailHtml,
+        });
+        console.log(`Email promo sent to ${email} for ${bizId}`);
       } else {
         console.error(`No email found for user ${uid}, skipping email promo.`);
       }
 
-    if (expoToken && Expo.isExpoPushToken(expoToken)) {
+      if (expoToken && Expo.isExpoPushToken(expoToken)) {
         await expo.sendPushNotificationsAsync([
           {
             to: expoToken,
@@ -85,8 +85,8 @@ export const emailPromo = onDocumentCreated(
             JSON.stringify({
               title: `🍽️ New deal on ${bizId}`,
               body: 'Check your wishlist for a new restaurant promo!',
-              icon: 'https://forkly.app/icon.png', // Recommended for web push
-              url: `https://forkly.app/wishlist?bizId=${bizId}`, // Custom action URL
+              icon: 'https://forkly.app/icon.png',
+              url: `https://forkly.app/wishlist?bizId=${bizId}`, 
             })
           );
           console.log(`Web push notification sent to ${uid} for ${bizId}`);

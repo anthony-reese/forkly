@@ -1,0 +1,739 @@
+[debug] [2025-07-12T20:14:58.108Z] ----------------------------------------------------------------------
+[debug] [2025-07-12T20:14:58.112Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\dbare\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only functions:emailPromo
+[debug] [2025-07-12T20:14:58.112Z] CLI Version:   14.10.1
+[debug] [2025-07-12T20:14:58.112Z] Platform:      win32
+[debug] [2025-07-12T20:14:58.112Z] Node Version:  v20.19.3
+[debug] [2025-07-12T20:14:58.112Z] Time:          Sun Jul 13 2025 00:14:58 GMT+0400 (Gulf Standard Time)
+[debug] [2025-07-12T20:14:58.112Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-07-12T20:14:58.275Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-12T20:14:58.275Z] > authorizing via signed-in user (dyq0132@gmail.com)
+[debug] [2025-07-12T20:14:58.276Z] [iam] checking project forkly-da5a7 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2025-07-12T20:14:58.277Z] Checked if tokens are valid: false, expires at: 1752351370609
+[debug] [2025-07-12T20:14:58.277Z] Checked if tokens are valid: false, expires at: 1752351370609
+[debug] [2025-07-12T20:14:58.277Z] > refreshing access token with scopes: []
+[debug] [2025-07-12T20:14:58.278Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-07-12T20:14:58.278Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-07-12T20:15:00.963Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-07-12T20:15:00.963Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-07-12T20:15:00.976Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7:testIamPermissions [none]
+[debug] [2025-07-12T20:15:00.977Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7:testIamPermissions x-goog-quota-user=projects/forkly-da5a7
+[debug] [2025-07-12T20:15:00.977Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2025-07-12T20:15:03.676Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7:testIamPermissions 200
+[debug] [2025-07-12T20:15:03.676Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2025-07-12T20:15:03.677Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:03.677Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:03.677Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/forkly-da5a7/serviceAccounts/forkly-da5a7@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2025-07-12T20:15:03.677Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/forkly-da5a7/serviceAccounts/forkly-da5a7@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2025-07-12T20:15:06.365Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/forkly-da5a7/serviceAccounts/forkly-da5a7@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2025-07-12T20:15:06.365Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/forkly-da5a7/serviceAccounts/forkly-da5a7@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'forkly-da5a7'...
+[info] 
+[info] i  deploying functions 
+[info] +  functions: Finished running predeploy script. 
+[debug] [2025-07-12T20:15:06.374Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:06.374Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:06.374Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7 [none]
+[debug] [2025-07-12T20:15:06.754Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7 200
+[debug] [2025-07-12T20:15:06.754Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7 {"projectNumber":"738393752123","projectId":"forkly-da5a7","lifecycleState":"ACTIVE","name":"Forkly","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2025-07-01T20:24:13.196809Z"}
+[info] i  functions: preparing codebase default for deployment 
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2025-07-12T20:15:06.763Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:06.763Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:06.763Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/forkly-da5a7/adminSdkConfig [none]
+[debug] [2025-07-12T20:15:09.249Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/forkly-da5a7/adminSdkConfig 200
+[debug] [2025-07-12T20:15:09.249Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/forkly-da5a7/adminSdkConfig {"projectId":"forkly-da5a7","storageBucket":"forkly-da5a7.firebasestorage.app"}
+[debug] [2025-07-12T20:15:09.249Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:09.249Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:09.249Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/forkly-da5a7/configs [none]
+[debug] [2025-07-12T20:15:11.936Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/forkly-da5a7/configs 200
+[debug] [2025-07-12T20:15:11.936Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/forkly-da5a7/configs {"configs":[{"name":"projects/forkly-da5a7/configs/resend"}]}
+[debug] [2025-07-12T20:15:11.936Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:11.936Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:11.936Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/forkly-da5a7/configs/resend/variables [none]
+[debug] [2025-07-12T20:15:12.290Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/forkly-da5a7/configs/resend/variables 200
+[debug] [2025-07-12T20:15:12.290Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/forkly-da5a7/configs/resend/variables {}
+[debug] [2025-07-12T20:15:12.292Z] Validating nodejs source
+[debug] [2025-07-12T20:15:17.561Z] > [functions] package.json contents: {
+  "name": "functions",
+  "scripts": {
+    "lint": "eslint .js,.ts .",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "20"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "@react-email/components": "^0.2.0",
+    "@types/react-dom": "^19.1.6",
+    "dotenv": "^17.2.0",
+    "expo-server-sdk": "^3.15.0",
+    "firebase-admin": "^13.4.0",
+    "firebase-functions": "^6.3.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "resend": "^4.6.0",
+    "web-push": "^3.6.7"
+  },
+  "devDependencies": {
+    "@types/html-to-text": "^9.0.4",
+    "@types/node": "^24.0.13",
+    "@types/prismjs": "^1.26.5",
+    "@types/react": "^19.1.8",
+    "@types/web-push": "^3.6.4",
+    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "@typescript-eslint/parser": "^5.12.0",
+    "eslint": "^8.9.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-import": "^2.25.4",
+    "firebase-functions-test": "^3.1.0",
+    "typescript": "^5.7.3"
+  },
+  "private": true
+}
+[debug] [2025-07-12T20:15:17.562Z] Building nodejs source
+[info] i  functions: Loading and analyzing source code for codebase default to determine what to deploy 
+[debug] [2025-07-12T20:15:17.564Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-07-12T20:15:17.575Z] Found firebase-functions binary at 'd:\forkly\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8076
+
+[debug] [2025-07-12T20:15:18.544Z] Got response from /__/functions.yaml {"endpoints":{"emailPromo":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","region":["us-central1"],"secretEnvironmentVariables":[{"key":"RESEND_KEY"},{"key":"WEB_PUSH_PUBLIC_KEY"},{"key":"WEB_PUSH_PRIVATE_KEY"}],"labels":{},"eventTrigger":{"eventType":"google.cloud.firestore.document.v1.created","eventFilters":{"database":"(default)","namespace":"(default)"},"eventFilterPathPatterns":{"document":"wishlists/{uid}/items/{bizId}"},"retry":false},"entryPoint":"emailPromo"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{},"params":[{"type":"secret","name":"RESEND_KEY"},{"type":"secret","name":"WEB_PUSH_PUBLIC_KEY"},{"type":"secret","name":"WEB_PUSH_PRIVATE_KEY"}]}
+[info] i  extensions: ensuring required API firebaseextensions.googleapis.com is enabled... 
+[debug] [2025-07-12T20:15:22.579Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-12T20:15:22.580Z] > authorizing via signed-in user (dyq0132@gmail.com)
+[debug] [2025-07-12T20:15:22.580Z] [iam] checking project forkly-da5a7 for permissions ["firebase.projects.get","firebaseextensions.instances.list"]
+[debug] [2025-07-12T20:15:22.580Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:22.580Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:22.580Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7:testIamPermissions [none]
+[debug] [2025-07-12T20:15:22.580Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7:testIamPermissions x-goog-quota-user=projects/forkly-da5a7
+[debug] [2025-07-12T20:15:22.580Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7:testIamPermissions {"permissions":["firebase.projects.get","firebaseextensions.instances.list"]}
+[debug] [2025-07-12T20:15:24.987Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7:testIamPermissions 200
+[debug] [2025-07-12T20:15:24.987Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7:testIamPermissions {"permissions":["firebase.projects.get","firebaseextensions.instances.list"]}
+[debug] [2025-07-12T20:15:24.987Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:24.987Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:24.988Z] >>> [apiv2][query] GET https://firebaseextensions.googleapis.com/v1beta/projects/forkly-da5a7/instances pageSize=100&pageToken=
+[debug] [2025-07-12T20:15:27.479Z] <<< [apiv2][status] GET https://firebaseextensions.googleapis.com/v1beta/projects/forkly-da5a7/instances 200
+[debug] [2025-07-12T20:15:27.479Z] <<< [apiv2][body] GET https://firebaseextensions.googleapis.com/v1beta/projects/forkly-da5a7/instances {}
+[info] i  functions: Loaded environment variables from .env. 
+[info] i  functions: preparing functions directory for uploading... 
+[info] i  functions: packaged d:\forkly\functions (108.84 KB) for uploading 
+[debug] [2025-07-12T20:15:27.534Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:27.534Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:27.534Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/projects/forkly-da5a7/locations/-/functions [none]
+[debug] [2025-07-12T20:15:30.573Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/projects/forkly-da5a7/locations/-/functions 200
+[debug] [2025-07-12T20:15:30.573Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/projects/forkly-da5a7/locations/-/functions {}
+[debug] [2025-07-12T20:15:30.573Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:30.573Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:30.573Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v2/projects/forkly-da5a7/locations/-/functions filter=environment%3D%22GEN_2%22
+[debug] [2025-07-12T20:15:31.168Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v2/projects/forkly-da5a7/locations/-/functions 200
+[debug] [2025-07-12T20:15:31.168Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v2/projects/forkly-da5a7/locations/-/functions {}
+[debug] [2025-07-12T20:15:31.168Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:31.168Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:31.169Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/forkly-da5a7/databases/(default) [none]
+[debug] [2025-07-12T20:15:32.376Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/forkly-da5a7/databases/(default) 200
+[debug] [2025-07-12T20:15:32.376Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/forkly-da5a7/databases/(default) {"name":"projects/forkly-da5a7/databases/(default)","uid":"ae51a3da-eb40-4c95-bd42-d16e872d9390","createTime":"2025-07-01T20:33:14.069290Z","updateTime":"2025-07-01T20:33:14.069290Z","locationId":"nam5","type":"FIRESTORE_NATIVE","concurrencyMode":"PESSIMISTIC","versionRetentionPeriod":"3600s","earliestVersionTime":"2025-07-12T19:15:33.606323Z","appEngineIntegrationMode":"DISABLED","keyPrefix":"s","pointInTimeRecoveryEnablement":"POINT_IN_TIME_RECOVERY_DISABLED","deleteProtectionState":"DELETE_PROTECTION_DISABLED","databaseEdition":"STANDARD","freeTier":true,"etag":"IOHBi7aRuI4DMPHcmtSKuI4D"}
+[info] i  functions: ensuring required API run.googleapis.com is enabled... 
+[info] i  functions: ensuring required API eventarc.googleapis.com is enabled... 
+[info] i  functions: ensuring required API pubsub.googleapis.com is enabled... 
+[info] i  functions: ensuring required API storage.googleapis.com is enabled... 
+[info] i  functions: generating the service identity for pubsub.googleapis.com... 
+[debug] [2025-07-12T20:15:32.384Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:32.384Z] Checked if tokens are valid: true, expires at: 1752354899963
+[info] i  functions: generating the service identity for eventarc.googleapis.com... 
+[debug] [2025-07-12T20:15:32.384Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:32.384Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:32.384Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1beta1/projects/738393752123/services/pubsub.googleapis.com:generateServiceIdentity [none]
+[debug] [2025-07-12T20:15:32.384Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1beta1/projects/738393752123/services/pubsub.googleapis.com:generateServiceIdentity x-goog-quota-user=projects/738393752123
+[debug] [2025-07-12T20:15:32.384Z] >>> [apiv2][body] POST https://serviceusage.googleapis.com/v1beta1/projects/738393752123/services/pubsub.googleapis.com:generateServiceIdentity {}
+[debug] [2025-07-12T20:15:32.385Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1beta1/projects/738393752123/services/eventarc.googleapis.com:generateServiceIdentity [none]
+[debug] [2025-07-12T20:15:32.385Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1beta1/projects/738393752123/services/eventarc.googleapis.com:generateServiceIdentity x-goog-quota-user=projects/738393752123
+[debug] [2025-07-12T20:15:32.385Z] >>> [apiv2][body] POST https://serviceusage.googleapis.com/v1beta1/projects/738393752123/services/eventarc.googleapis.com:generateServiceIdentity {}
+[debug] [2025-07-12T20:15:34.934Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1beta1/projects/738393752123/services/pubsub.googleapis.com:generateServiceIdentity 200
+[debug] [2025-07-12T20:15:34.934Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1beta1/projects/738393752123/services/pubsub.googleapis.com:generateServiceIdentity {"name":"operations/finished.DONE_OPERATION","done":true,"response":{"@type":"type.googleapis.com/google.api.serviceusage.v1beta1.ServiceIdentity","email":"service-738393752123@gcp-sa-pubsub.iam.gserviceaccount.com","uniqueId":"112551654675384557367"}}
+[debug] [2025-07-12T20:15:34.961Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1beta1/projects/738393752123/services/eventarc.googleapis.com:generateServiceIdentity 200
+[debug] [2025-07-12T20:15:34.961Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1beta1/projects/738393752123/services/eventarc.googleapis.com:generateServiceIdentity {"name":"operations/finished.DONE_OPERATION","done":true,"response":{"@type":"type.googleapis.com/google.api.serviceusage.v1beta1.ServiceIdentity","email":"service-738393752123@gcp-sa-eventarc.iam.gserviceaccount.com","uniqueId":"107371385583953072450"}}
+[info] i  functions: ensuring required API secretmanager.googleapis.com is enabled... 
+[debug] [2025-07-12T20:15:34.964Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:34.964Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:34.964Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:34.964Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:34.964Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:34.964Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:34.964Z] >>> [apiv2][query] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/RESEND_KEY/versions/latest [none]
+[debug] [2025-07-12T20:15:34.965Z] >>> [apiv2][query] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/WEB_PUSH_PUBLIC_KEY/versions/latest [none]
+[debug] [2025-07-12T20:15:34.966Z] >>> [apiv2][query] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/WEB_PUSH_PRIVATE_KEY/versions/latest [none]
+[debug] [2025-07-12T20:15:37.615Z] <<< [apiv2][status] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/WEB_PUSH_PUBLIC_KEY/versions/latest 200
+[debug] [2025-07-12T20:15:37.615Z] <<< [apiv2][body] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/WEB_PUSH_PUBLIC_KEY/versions/latest {"name":"projects/738393752123/secrets/WEB_PUSH_PUBLIC_KEY/versions/1","createTime":"2025-07-12T16:00:41.106053Z","state":"ENABLED","replicationStatus":{"automatic":{}},"etag":"\"1639bd8741da85\""}
+[debug] [2025-07-12T20:15:37.616Z] Resolved secret version of WEB_PUSH_PUBLIC_KEY to 1.
+[debug] [2025-07-12T20:15:37.621Z] <<< [apiv2][status] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/WEB_PUSH_PRIVATE_KEY/versions/latest 200
+[debug] [2025-07-12T20:15:37.621Z] <<< [apiv2][body] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/WEB_PUSH_PRIVATE_KEY/versions/latest {"name":"projects/738393752123/secrets/WEB_PUSH_PRIVATE_KEY/versions/1","createTime":"2025-07-12T16:02:12.369063Z","state":"ENABLED","replicationStatus":{"automatic":{}},"etag":"\"1639bd8cb26aa7\""}
+[debug] [2025-07-12T20:15:37.621Z] Resolved secret version of WEB_PUSH_PRIVATE_KEY to 1.
+[debug] [2025-07-12T20:15:37.624Z] <<< [apiv2][status] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/RESEND_KEY/versions/latest 200
+[debug] [2025-07-12T20:15:37.624Z] <<< [apiv2][body] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/RESEND_KEY/versions/latest {"name":"projects/738393752123/secrets/RESEND_KEY/versions/2","createTime":"2025-07-10T21:27:24.591687Z","state":"ENABLED","replicationStatus":{"automatic":{}},"etag":"\"163999dc088e47\""}
+[debug] [2025-07-12T20:15:37.624Z] Resolved secret version of RESEND_KEY to 2.
+[debug] [2025-07-12T20:15:37.624Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:37.624Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:37.624Z] >>> [apiv2][query] GET https://compute.googleapis.com/compute/v1/projects/738393752123 [none]
+[debug] [2025-07-12T20:15:38.748Z] <<< [apiv2][status] GET https://compute.googleapis.com/compute/v1/projects/738393752123 403
+[debug] [2025-07-12T20:15:38.749Z] <<< [apiv2][body] GET https://compute.googleapis.com/compute/v1/projects/738393752123 {"error":{"code":403,"message":"Compute Engine API has not been used in project 738393752123 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","errors":[{"message":"Compute Engine API has not been used in project 738393752123 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","domain":"usageLimits","reason":"accessNotConfigured","extendedHelp":"https://console.developers.google.com"}],"status":"PERMISSION_DENIED","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"SERVICE_DISABLED","domain":"googleapis.com","metadata":{"activationUrl":"https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123","service":"compute.googleapis.com","containerInfo":"738393752123","consumer":"projects/738393752123","serviceTitle":"Compute Engine API"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Compute Engine API has not been used in project 738393752123 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Google developers console API activation","url":"https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123"}]}]}}
+[debug] [2025-07-12T20:15:38.749Z] unable to look up default compute service account. Falling back to 738393752123-compute@developer.gserviceaccount.com. Error: {"name":"FirebaseError","children":[],"context":{"body":{"error":{"code":403,"message":"Compute Engine API has not been used in project 738393752123 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","errors":[{"message":"Compute Engine API has not been used in project 738393752123 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","domain":"usageLimits","reason":"accessNotConfigured","extendedHelp":"https://console.developers.google.com"}],"status":"PERMISSION_DENIED","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"SERVICE_DISABLED","domain":"googleapis.com","metadata":{"activationUrl":"https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123","service":"compute.googleapis.com","containerInfo":"738393752123","consumer":"projects/738393752123","serviceTitle":"Compute Engine API"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Compute Engine API has not been used in project 738393752123 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Google developers console API activation","url":"https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123"}]}]}},"response":{"statusCode":403}},"exit":1,"message":"Request to https://compute.googleapis.com/compute/v1/projects/738393752123 had HTTP Error: 403, Compute Engine API has not been used in project 738393752123 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","status":403}
+[debug] [2025-07-12T20:15:38.749Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:38.749Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:38.749Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/738393752123:getIamPolicy [none]
+[debug] [2025-07-12T20:15:41.487Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/738393752123:getIamPolicy 200
+[debug] [2025-07-12T20:15:41.487Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/738393752123:getIamPolicy {"version":1,"etag":"BwY5mTSoN6A=","bindings":[{"role":"roles/artifactregistry.serviceAgent","members":["serviceAccount:service-738393752123@gcp-sa-artifactregistry.iam.gserviceaccount.com"]},{"role":"roles/cloudbuild.builds.builder","members":["serviceAccount:738393752123@cloudbuild.gserviceaccount.com"]},{"role":"roles/cloudbuild.serviceAgent","members":["serviceAccount:service-738393752123@gcp-sa-cloudbuild.iam.gserviceaccount.com"]},{"role":"roles/cloudfunctions.serviceAgent","members":["serviceAccount:service-738393752123@gcf-admin-robot.iam.gserviceaccount.com"]},{"role":"roles/containerregistry.ServiceAgent","members":["serviceAccount:service-738393752123@containerregistry.iam.gserviceaccount.com"]},{"role":"roles/editor","members":["serviceAccount:738393752123-compute@developer.gserviceaccount.com","serviceAccount:738393752123@cloudservices.gserviceaccount.com","serviceAccount:forkly-da5a7@appspot.gserviceaccount.com"]},{"role":"roles/eventarc.eventReceiver","members":["serviceAccount:738393752123-compute@developer.gserviceaccount.com"]},{"role":"roles/eventarc.serviceAgent","members":["serviceAccount:service-738393752123@gcp-sa-eventarc.iam.gserviceaccount.com"]},{"role":"roles/firebase.managementServiceAgent","members":["serviceAccount:service-738393752123@gcp-sa-firebase.iam.gserviceaccount.com"]},{"role":"roles/firebase.sdkAdminServiceAgent","members":["serviceAccount:firebase-adminsdk-fbsvc@forkly-da5a7.iam.gserviceaccount.com"]},{"role":"roles/firebasemods.serviceAgent","members":["serviceAccount:service-738393752123@gcp-sa-firebasemods.iam.gserviceaccount.com"]},{"role":"roles/firebaserules.system","members":["serviceAccount:service-738393752123@firebase-rules.iam.gserviceaccount.com"]},{"role":"roles/firestore.serviceAgent","members":["serviceAccount:service-738393752123@gcp-sa-firestore.iam.gserviceaccount.com"]},{"role":"roles/iam.serviceAccountTokenCreator","members":["serviceAccount:firebase-adminsdk-fbsvc@forkly-da5a7.iam.gserviceaccount.com","serviceAccount:service-738393752123@gcp-sa-pubsub.iam.gserviceaccount.com"]},{"role":"roles/owner","members":["user:dyq0132@gmail.com"]},{"role":"roles/run.invoker","members":["serviceAccount:738393752123-compute@developer.gserviceaccount.com"]},{"role":"roles/run.serviceAgent","members":["serviceAccount:service-738393752123@serverless-robot-prod.iam.gserviceaccount.com"]}]}
+[debug] [2025-07-12T20:15:41.488Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:41.488Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:41.488Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7 [none]
+[debug] [2025-07-12T20:15:41.817Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7 200
+[debug] [2025-07-12T20:15:41.817Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7 {"projectNumber":"738393752123","projectId":"forkly-da5a7","lifecycleState":"ACTIVE","name":"Forkly","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2025-07-01T20:24:13.196809Z"}
+[debug] [2025-07-12T20:15:41.817Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:41.817Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:41.817Z] >>> [apiv2][query] GET https://compute.googleapis.com/compute/v1/projects/738393752123 [none]
+[debug] [2025-07-12T20:15:42.129Z] <<< [apiv2][status] GET https://compute.googleapis.com/compute/v1/projects/738393752123 403
+[debug] [2025-07-12T20:15:42.129Z] <<< [apiv2][body] GET https://compute.googleapis.com/compute/v1/projects/738393752123 {"error":{"code":403,"message":"Compute Engine API has not been used in project 738393752123 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","errors":[{"message":"Compute Engine API has not been used in project 738393752123 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","domain":"usageLimits","reason":"accessNotConfigured","extendedHelp":"https://console.developers.google.com"}],"status":"PERMISSION_DENIED","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"SERVICE_DISABLED","domain":"googleapis.com","metadata":{"serviceTitle":"Compute Engine API","containerInfo":"738393752123","activationUrl":"https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123","service":"compute.googleapis.com","consumer":"projects/738393752123"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Compute Engine API has not been used in project 738393752123 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Google developers console API activation","url":"https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123"}]}]}}
+[debug] [2025-07-12T20:15:42.129Z] unable to look up default compute service account. Falling back to 738393752123-compute@developer.gserviceaccount.com. Error: {"name":"FirebaseError","children":[],"context":{"body":{"error":{"code":403,"message":"Compute Engine API has not been used in project 738393752123 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","errors":[{"message":"Compute Engine API has not been used in project 738393752123 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","domain":"usageLimits","reason":"accessNotConfigured","extendedHelp":"https://console.developers.google.com"}],"status":"PERMISSION_DENIED","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"SERVICE_DISABLED","domain":"googleapis.com","metadata":{"serviceTitle":"Compute Engine API","containerInfo":"738393752123","activationUrl":"https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123","service":"compute.googleapis.com","consumer":"projects/738393752123"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Compute Engine API has not been used in project 738393752123 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Google developers console API activation","url":"https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123"}]}]}},"response":{"statusCode":403}},"exit":1,"message":"Request to https://compute.googleapis.com/compute/v1/projects/738393752123 had HTTP Error: 403, Compute Engine API has not been used in project 738393752123 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","status":403}
+[info] i  functions: ensuring 738393752123-compute@developer.gserviceaccount.com access to secret RESEND_KEY. 
+[debug] [2025-07-12T20:15:42.131Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:42.131Z] Checked if tokens are valid: true, expires at: 1752354899963
+[info] i  functions: ensuring 738393752123-compute@developer.gserviceaccount.com access to secret WEB_PUSH_PUBLIC_KEY. 
+[debug] [2025-07-12T20:15:42.134Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:42.134Z] Checked if tokens are valid: true, expires at: 1752354899963
+[info] i  functions: ensuring 738393752123-compute@developer.gserviceaccount.com access to secret WEB_PUSH_PRIVATE_KEY. 
+[debug] [2025-07-12T20:15:42.136Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:42.136Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:42.136Z] >>> [apiv2][query] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/RESEND_KEY:getIamPolicy [none]
+[debug] [2025-07-12T20:15:42.136Z] >>> [apiv2][query] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/WEB_PUSH_PUBLIC_KEY:getIamPolicy [none]
+[debug] [2025-07-12T20:15:42.136Z] >>> [apiv2][query] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/WEB_PUSH_PRIVATE_KEY:getIamPolicy [none]
+[debug] [2025-07-12T20:15:42.485Z] <<< [apiv2][status] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/WEB_PUSH_PRIVATE_KEY:getIamPolicy 200
+[debug] [2025-07-12T20:15:42.485Z] <<< [apiv2][body] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/WEB_PUSH_PRIVATE_KEY:getIamPolicy {"version":1,"etag":"BwY5vZdUm+Q=","bindings":[{"role":"roles/secretmanager.secretAccessor","members":["serviceAccount:738393752123-compute@developer.gserviceaccount.com"]}]}
+[info] +  secretmanager: Granted roles/secretmanager.secretAccessor on projects/forkly-da5a7/secrets/WEB_PUSH_PRIVATE_KEY to 738393752123-compute@developer.gserviceaccount.com 
+[info] +  functions: ensured 738393752123-compute@developer.gserviceaccount.com access to WEB_PUSH_PRIVATE_KEY. 
+[debug] [2025-07-12T20:15:42.589Z] <<< [apiv2][status] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/RESEND_KEY:getIamPolicy 200
+[debug] [2025-07-12T20:15:42.589Z] <<< [apiv2][body] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/RESEND_KEY:getIamPolicy {"version":1,"etag":"BwY5md9X2Dg=","bindings":[{"role":"roles/secretmanager.secretAccessor","members":["serviceAccount:738393752123-compute@developer.gserviceaccount.com"]}]}
+[info] +  secretmanager: Granted roles/secretmanager.secretAccessor on projects/forkly-da5a7/secrets/RESEND_KEY to 738393752123-compute@developer.gserviceaccount.com 
+[info] +  functions: ensured 738393752123-compute@developer.gserviceaccount.com access to RESEND_KEY. 
+[debug] [2025-07-12T20:15:42.594Z] <<< [apiv2][status] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/WEB_PUSH_PUBLIC_KEY:getIamPolicy 200
+[debug] [2025-07-12T20:15:42.594Z] <<< [apiv2][body] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/WEB_PUSH_PUBLIC_KEY:getIamPolicy {"version":1,"etag":"BwY5vZdUpyU=","bindings":[{"role":"roles/secretmanager.secretAccessor","members":["serviceAccount:738393752123-compute@developer.gserviceaccount.com"]}]}
+[info] +  secretmanager: Granted roles/secretmanager.secretAccessor on projects/forkly-da5a7/secrets/WEB_PUSH_PUBLIC_KEY to 738393752123-compute@developer.gserviceaccount.com 
+[info] +  functions: ensured 738393752123-compute@developer.gserviceaccount.com access to WEB_PUSH_PUBLIC_KEY. 
+[debug] [2025-07-12T20:15:42.597Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:42.597Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:42.597Z] >>> [apiv2][query] GET https://cloudbilling.googleapis.com/v1/projects/forkly-da5a7/billingInfo [none]
+[debug] [2025-07-12T20:15:45.247Z] <<< [apiv2][status] GET https://cloudbilling.googleapis.com/v1/projects/forkly-da5a7/billingInfo 200
+[debug] [2025-07-12T20:15:45.247Z] <<< [apiv2][body] GET https://cloudbilling.googleapis.com/v1/projects/forkly-da5a7/billingInfo {"name":"projects/forkly-da5a7/billingInfo","projectId":"forkly-da5a7","billingAccountName":"billingAccounts/015E2D-9D446D-FF65B2","billingEnabled":true}
+[debug] [2025-07-12T20:15:45.248Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:45.248Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:45.248Z] >>> [apiv2][query] POST https://cloudfunctions.googleapis.com/v2/projects/forkly-da5a7/locations/us-central1/functions:generateUploadUrl [none]
+[debug] [2025-07-12T20:15:47.787Z] <<< [apiv2][status] POST https://cloudfunctions.googleapis.com/v2/projects/forkly-da5a7/locations/us-central1/functions:generateUploadUrl 200
+[debug] [2025-07-12T20:15:47.788Z] <<< [apiv2][body] POST https://cloudfunctions.googleapis.com/v2/projects/forkly-da5a7/locations/us-central1/functions:generateUploadUrl {"uploadUrl":"https://storage.googleapis.com/gcf-v2-uploads-738393752123.us-central1.cloudfunctions.appspot.com/bac21a7a-4865-4ae1-8359-2e7ec2cf09c9.zip?GoogleAccessId=service-738393752123@gcf-admin-robot.iam.gserviceaccount.com&Expires=1752353148&Signature=CMuaxo5lAPKFEXwYWwmIzmGb4vozLpj7goI6iIP%2F3eRQ3GGtKhv7xSo1yawP%2ByrtP8dJAfnCZIYOWjK79ZvIFNq17703dCYmTJJ703PRU9sC5akrVJAlQ02bwpnLtwUdWHgCC8%2FNpx%2F9UcCsYJDB8yFKi3LttxK0neKa%2BWuVqANpowrn0Y7wl7J1XbfX0qC4tyli6vtKnWcn%2B3rvfAd2%2BH5c6KCcVZGbdw0IPLOeiMieFZJs4E5XkEoQhDkuiE%2BymWiUiP4YW8w2ugNkSelT6ggCzRpnG%2FCJ1CbbiuSiyo5mx2HBBL669RiIX49qZnARleMBbnlM7BJMdLKNlvkt9g%3D%3D","storageSource":{"bucket":"gcf-v2-uploads-738393752123.us-central1.cloudfunctions.appspot.com","object":"bac21a7a-4865-4ae1-8359-2e7ec2cf09c9.zip"}}
+[debug] [2025-07-12T20:15:47.788Z] >>> [apiv2][query] PUT https://storage.googleapis.com/gcf-v2-uploads-738393752123.us-central1.cloudfunctions.appspot.com/bac21a7a-4865-4ae1-8359-2e7ec2cf09c9.zip GoogleAccessId=service-738393752123%40gcf-admin-robot.iam.gserviceaccount.com&Expires=1752353148&Signature=CMuaxo5lAPKFEXwYWwmIzmGb4vozLpj7goI6iIP%2F3eRQ3GGtKhv7xSo1yawP%2ByrtP8dJAfnCZIYOWjK79ZvIFNq17703dCYmTJJ703PRU9sC5akrVJAlQ02bwpnLtwUdWHgCC8%2FNpx%2F9UcCsYJDB8yFKi3LttxK0neKa%2BWuVqANpowrn0Y7wl7J1XbfX0qC4tyli6vtKnWcn%2B3rvfAd2%2BH5c6KCcVZGbdw0IPLOeiMieFZJs4E5XkEoQhDkuiE%2BymWiUiP4YW8w2ugNkSelT6ggCzRpnG%2FCJ1CbbiuSiyo5mx2HBBL669RiIX49qZnARleMBbnlM7BJMdLKNlvkt9g%3D%3D
+[debug] [2025-07-12T20:15:47.789Z] >>> [apiv2][body] PUT https://storage.googleapis.com/gcf-v2-uploads-738393752123.us-central1.cloudfunctions.appspot.com/bac21a7a-4865-4ae1-8359-2e7ec2cf09c9.zip [stream]
+[debug] [2025-07-12T20:15:51.263Z] <<< [apiv2][status] PUT https://storage.googleapis.com/gcf-v2-uploads-738393752123.us-central1.cloudfunctions.appspot.com/bac21a7a-4865-4ae1-8359-2e7ec2cf09c9.zip 200
+[debug] [2025-07-12T20:15:51.263Z] <<< [apiv2][body] PUT https://storage.googleapis.com/gcf-v2-uploads-738393752123.us-central1.cloudfunctions.appspot.com/bac21a7a-4865-4ae1-8359-2e7ec2cf09c9.zip [omitted]
+[info] +  functions: functions folder uploaded successfully 
+[info] i  functions: creating Node.js 20 (2nd Gen) function emailPromo(us-central1)... 
+[debug] [2025-07-12T20:15:51.274Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:51.274Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:51.274Z] >>> [apiv2][query] POST https://cloudfunctions.googleapis.com/v2/projects/forkly-da5a7/locations/us-central1/functions functionId=emailPromo
+[debug] [2025-07-12T20:15:51.274Z] >>> [apiv2][body] POST https://cloudfunctions.googleapis.com/v2/projects/forkly-da5a7/locations/us-central1/functions {"name":"projects/forkly-da5a7/locations/us-central1/functions/emailPromo","buildConfig":{"runtime":"nodejs20","entryPoint":"emailPromo","source":{"storageSource":{"bucket":"gcf-v2-uploads-738393752123.us-central1.cloudfunctions.appspot.com","object":"bac21a7a-4865-4ae1-8359-2e7ec2cf09c9.zip"}},"environmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""}},"serviceConfig":{"environmentVariables":{"RESEND_KEY":"re_fZe9V1Ew_6mqzVvQpPuEEW1HEJPa9GrUs","WEB_PUSH_PUBLIC_KEY":"BFSVt_dTIzVOMbz9hZMzP87B1TzEAwkS1lcyxcDjh42ZBrjXiyLfgZmrgvABLpgQYypYADvO-8oGDLrekUK4gDs","WEB_PUSH_PRIVATE_KEY":"lV9LM-TKldXeMTq51DlTjc5aUag7NisU3JF3cDLsu2w","FIREBASE_CONFIG":"{\"projectId\":\"forkly-da5a7\",\"storageBucket\":\"forkly-da5a7.firebasestorage.app\"}","GCLOUD_PROJECT":"forkly-da5a7","EVENTARC_CLOUD_EVENT_SOURCE":"projects/forkly-da5a7/locations/us-central1/services/emailPromo","FUNCTION_SIGNATURE_TYPE":"cloudevent","FUNCTION_TARGET":"emailPromo","LOG_EXECUTION_ID":"true"},"secretEnvironmentVariables":[{"key":"RESEND_KEY","secret":"RESEND_KEY","projectId":"forkly-da5a7","version":"2"},{"key":"WEB_PUSH_PUBLIC_KEY","secret":"WEB_PUSH_PUBLIC_KEY","projectId":"forkly-da5a7","version":"1"},{"key":"WEB_PUSH_PRIVATE_KEY","secret":"WEB_PUSH_PRIVATE_KEY","projectId":"forkly-da5a7","version":"1"}],"ingressSettings":null,"timeoutSeconds":null,"serviceAccountEmail":null,"availableMemory":"256Mi","minInstanceCount":null,"maxInstanceCount":null,"maxInstanceRequestConcurrency":80,"availableCpu":"1","vpcConnector":null,"vpcConnectorEgressSettings":null},"labels":{"deployment-tool":"cli-firebase","firebase-functions-hash":"29e0777332459b198dbcbc39b4eb7cae35e150e8"},"eventTrigger":{"eventType":"google.cloud.firestore.document.v1.created","retryPolicy":"RETRY_POLICY_DO_NOT_RETRY","eventFilters":[{"attribute":"database","value":"(default)"},{"attribute":"namespace","value":"(default)"},{"attribute":"document","value":"wishlists/{uid}/items/{bizId}","operator":"match-path-pattern"}],"triggerRegion":"nam5"}}
+[debug] [2025-07-12T20:15:52.215Z] <<< [apiv2][status] POST https://cloudfunctions.googleapis.com/v2/projects/forkly-da5a7/locations/us-central1/functions 400
+[debug] [2025-07-12T20:15:52.215Z] <<< [apiv2][body] POST https://cloudfunctions.googleapis.com/v2/projects/forkly-da5a7/locations/us-central1/functions {"error":{"code":400,"message":"Could not create Cloud Run service emailpromo. spec.template.spec.containers[0].env: Secret environment variable overlaps non secret environment variable: RESEND_KEY","status":"INVALID_ARGUMENT"}}
+[warn] !  functions: Request to https://cloudfunctions.googleapis.com/v2/projects/forkly-da5a7/locations/us-central1/functions?functionId=emailPromo had HTTP Error: 400, Could not create Cloud Run service emailpromo. spec.template.spec.containers[0].env: Secret environment variable overlaps non secret environment variable: RESEND_KEY 
+[warn] !  functions:  failed to create function projects/forkly-da5a7/locations/us-central1/functions/emailPromo 
+[error] Failed to create function projects/forkly-da5a7/locations/us-central1/functions/emailPromo
+[debug] [2025-07-12T20:15:52.226Z] Total Function Deployment time: 952
+[debug] [2025-07-12T20:15:52.226Z] 1 Functions Deployed
+[debug] [2025-07-12T20:15:52.226Z] 1 Functions Errored
+[debug] [2025-07-12T20:15:52.226Z] 0 Function Deployments Aborted
+[debug] [2025-07-12T20:15:52.226Z] Average Function Deployment time: 948
+[info] 
+[info] Functions deploy had errors with the following functions:
+	emailPromo(us-central1)
+[debug] [2025-07-12T20:15:54.589Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:54.589Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:15:54.590Z] >>> [apiv2][query] GET https://artifactregistry.googleapis.com/v1/projects/forkly-da5a7/locations/us-central1/repositories/gcf-artifacts [none]
+[debug] [2025-07-12T20:15:57.047Z] <<< [apiv2][status] GET https://artifactregistry.googleapis.com/v1/projects/forkly-da5a7/locations/us-central1/repositories/gcf-artifacts 200
+[debug] [2025-07-12T20:15:57.048Z] <<< [apiv2][body] GET https://artifactregistry.googleapis.com/v1/projects/forkly-da5a7/locations/us-central1/repositories/gcf-artifacts {"name":"projects/forkly-da5a7/locations/us-central1/repositories/gcf-artifacts","format":"DOCKER","description":"This repository is created and used by Cloud Functions for storing function docker images.","labels":{"goog-managed-by":"cloudfunctions"},"createTime":"2025-07-09T19:43:59.876557Z","updateTime":"2025-07-12T17:17:44.272339Z","mode":"STANDARD_REPOSITORY","cleanupPolicies":{"firebase-functions-cleanup":{"id":"firebase-functions-cleanup","action":"DELETE","condition":{"tagState":"ANY","olderThan":"2592000s"}}},"sizeBytes":"156779192","vulnerabilityScanningConfig":{"lastEnableTime":"2025-07-09T19:43:50.942015355Z","enablementState":"SCANNING_DISABLED","enablementStateReason":"API containerscanning.googleapis.com is not enabled."},"satisfiesPzi":true,"registryUri":"us-central1-docker.pkg.dev/forkly-da5a7/gcf-artifacts"}
+[debug] [2025-07-12T20:15:57.048Z] Functions deploy failed.
+[debug] [2025-07-12T20:15:57.048Z] {
+  "endpoint": {
+    "id": "emailPromo",
+    "project": "forkly-da5a7",
+    "region": "us-central1",
+    "entryPoint": "emailPromo",
+    "platform": "gcfv2",
+    "runtime": "nodejs20",
+    "eventTrigger": {
+      "eventType": "google.cloud.firestore.document.v1.created",
+      "retry": false,
+      "eventFilters": {
+        "database": "(default)",
+        "namespace": "(default)"
+      },
+      "eventFilterPathPatterns": {
+        "document": "wishlists/{uid}/items/{bizId}"
+      },
+      "region": "nam5"
+    },
+    "labels": {
+      "deployment-tool": "cli-firebase"
+    },
+    "secretEnvironmentVariables": [
+      {
+        "key": "RESEND_KEY",
+        "secret": "RESEND_KEY",
+        "projectId": "forkly-da5a7",
+        "version": "2"
+      },
+      {
+        "key": "WEB_PUSH_PUBLIC_KEY",
+        "secret": "WEB_PUSH_PUBLIC_KEY",
+        "projectId": "forkly-da5a7",
+        "version": "1"
+      },
+      {
+        "key": "WEB_PUSH_PRIVATE_KEY",
+        "secret": "WEB_PUSH_PRIVATE_KEY",
+        "projectId": "forkly-da5a7",
+        "version": "1"
+      }
+    ],
+    "serviceAccount": null,
+    "ingressSettings": null,
+    "availableMemoryMb": null,
+    "timeoutSeconds": null,
+    "maxInstances": null,
+    "minInstances": null,
+    "concurrency": 80,
+    "vpc": null,
+    "environmentVariables": {
+      "RESEND_KEY": "re_fZe9V1Ew_6mqzVvQpPuEEW1HEJPa9GrUs",
+      "WEB_PUSH_PUBLIC_KEY": "BFSVt_dTIzVOMbz9hZMzP87B1TzEAwkS1lcyxcDjh42ZBrjXiyLfgZmrgvABLpgQYypYADvO-8oGDLrekUK4gDs",
+      "WEB_PUSH_PRIVATE_KEY": "lV9LM-TKldXeMTq51DlTjc5aUag7NisU3JF3cDLsu2w",
+      "FIREBASE_CONFIG": "{\"projectId\":\"forkly-da5a7\",\"storageBucket\":\"forkly-da5a7.firebasestorage.app\"}",
+      "GCLOUD_PROJECT": "forkly-da5a7",
+      "EVENTARC_CLOUD_EVENT_SOURCE": "projects/forkly-da5a7/locations/us-central1/services/emailPromo"
+    },
+    "codebase": "default",
+    "cpu": 1,
+    "targetedByOnly": true,
+    "hash": "29e0777332459b198dbcbc39b4eb7cae35e150e8"
+  },
+  "op": "create",
+  "original": {
+    "name": "FirebaseError",
+    "children": [],
+    "context": {
+      "function": "projects/forkly-da5a7/locations/us-central1/functions/emailPromo"
+    },
+    "exit": 1,
+    "message": "Failed to create function projects/forkly-da5a7/locations/us-central1/functions/emailPromo",
+    "original": {
+      "name": "FirebaseError",
+      "children": [],
+      "context": {
+        "body": {
+          "error": {
+            "code": 400,
+            "message": "Could not create Cloud Run service emailpromo. spec.template.spec.containers[0].env: Secret environment variable overlaps non secret environment variable: RESEND_KEY",
+            "status": "INVALID_ARGUMENT"
+          }
+        },
+        "response": {
+          "statusCode": 400
+        }
+      },
+      "exit": 1,
+      "message": "Request to https://cloudfunctions.googleapis.com/v2/projects/forkly-da5a7/locations/us-central1/functions?functionId=emailPromo had HTTP Error: 400, Could not create Cloud Run service emailpromo. spec.template.spec.containers[0].env: Secret environment variable overlaps non secret environment variable: RESEND_KEY",
+      "status": 400
+    },
+    "status": 400,
+    "code": 400
+  }
+}
+[debug] [2025-07-12T20:15:57.340Z] Error: Failed to create function emailPromo in region us-central1
+    at C:\Users\dbare\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\release\fabricator.js:294:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Fabricator.createV2Function (C:\Users\dbare\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\release\fabricator.js:278:30)
+    at async Fabricator.createEndpoint (C:\Users\dbare\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\release\fabricator.js:137:13)
+    at async handle (C:\Users\dbare\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\release\fabricator.js:89:17)
+[error] 
+[error] Error: There was an error deploying functions
+[debug] [2025-07-12T20:55:38.668Z] ----------------------------------------------------------------------
+[debug] [2025-07-12T20:55:38.671Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\dbare\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only functions:emailPromo
+[debug] [2025-07-12T20:55:38.671Z] CLI Version:   14.10.1
+[debug] [2025-07-12T20:55:38.671Z] Platform:      win32
+[debug] [2025-07-12T20:55:38.672Z] Node Version:  v20.19.3
+[debug] [2025-07-12T20:55:38.672Z] Time:          Sun Jul 13 2025 00:55:38 GMT+0400 (Gulf Standard Time)
+[debug] [2025-07-12T20:55:38.672Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-07-12T20:55:38.825Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-12T20:55:38.826Z] > authorizing via signed-in user (dyq0132@gmail.com)
+[debug] [2025-07-12T20:55:38.826Z] [iam] checking project forkly-da5a7 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2025-07-12T20:55:38.827Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:55:38.827Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:55:38.828Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7:testIamPermissions [none]
+[debug] [2025-07-12T20:55:38.828Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7:testIamPermissions x-goog-quota-user=projects/forkly-da5a7
+[debug] [2025-07-12T20:55:38.828Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2025-07-12T20:55:41.251Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7:testIamPermissions 200
+[debug] [2025-07-12T20:55:41.251Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2025-07-12T20:55:41.251Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:55:41.251Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:55:41.251Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/forkly-da5a7/serviceAccounts/forkly-da5a7@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2025-07-12T20:55:41.251Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/forkly-da5a7/serviceAccounts/forkly-da5a7@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2025-07-12T20:55:43.687Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/forkly-da5a7/serviceAccounts/forkly-da5a7@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2025-07-12T20:55:43.687Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/forkly-da5a7/serviceAccounts/forkly-da5a7@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'forkly-da5a7'...
+[info] 
+[info] i  deploying functions 
+[info] +  functions: Finished running predeploy script. 
+[debug] [2025-07-12T20:55:43.696Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:55:43.696Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:55:43.696Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7 [none]
+[debug] [2025-07-12T20:55:44.031Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7 200
+[debug] [2025-07-12T20:55:44.032Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7 {"projectNumber":"738393752123","projectId":"forkly-da5a7","lifecycleState":"ACTIVE","name":"Forkly","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2025-07-01T20:24:13.196809Z"}
+[info] i  functions: preparing codebase default for deployment 
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2025-07-12T20:55:44.041Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:55:44.041Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:55:44.042Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/forkly-da5a7/adminSdkConfig [none]
+[debug] [2025-07-12T20:55:46.771Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/forkly-da5a7/adminSdkConfig 200
+[debug] [2025-07-12T20:55:46.771Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/forkly-da5a7/adminSdkConfig {"projectId":"forkly-da5a7","storageBucket":"forkly-da5a7.firebasestorage.app"}
+[debug] [2025-07-12T20:55:46.772Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:55:46.772Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:55:46.772Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/forkly-da5a7/configs [none]
+[debug] [2025-07-12T20:55:49.253Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/forkly-da5a7/configs 200
+[debug] [2025-07-12T20:55:49.253Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/forkly-da5a7/configs {"configs":[{"name":"projects/forkly-da5a7/configs/resend"}]}
+[debug] [2025-07-12T20:55:49.254Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:55:49.254Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:55:49.254Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/forkly-da5a7/configs/resend/variables [none]
+[debug] [2025-07-12T20:55:49.606Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/forkly-da5a7/configs/resend/variables 200
+[debug] [2025-07-12T20:55:49.607Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/forkly-da5a7/configs/resend/variables {}
+[debug] [2025-07-12T20:55:49.608Z] Validating nodejs source
+[debug] [2025-07-12T20:55:54.924Z] > [functions] package.json contents: {
+  "name": "functions",
+  "scripts": {
+    "lint": "eslint .js,.ts .",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "20"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "@react-email/components": "^0.2.0",
+    "@types/react-dom": "^19.1.6",
+    "dotenv": "^17.2.0",
+    "expo-server-sdk": "^3.15.0",
+    "firebase-admin": "^13.4.0",
+    "firebase-functions": "^6.3.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "resend": "^4.6.0",
+    "web-push": "^3.6.7"
+  },
+  "devDependencies": {
+    "@types/html-to-text": "^9.0.4",
+    "@types/node": "^24.0.13",
+    "@types/prismjs": "^1.26.5",
+    "@types/react": "^19.1.8",
+    "@types/web-push": "^3.6.4",
+    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "@typescript-eslint/parser": "^5.12.0",
+    "eslint": "^8.9.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-import": "^2.25.4",
+    "firebase-functions-test": "^3.1.0",
+    "typescript": "^5.7.3"
+  },
+  "private": true
+}
+[debug] [2025-07-12T20:55:54.925Z] Building nodejs source
+[info] i  functions: Loading and analyzing source code for codebase default to determine what to deploy 
+[debug] [2025-07-12T20:55:54.927Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-07-12T20:55:54.939Z] Found firebase-functions binary at 'd:\forkly\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8068
+
+[debug] [2025-07-12T20:55:55.934Z] Got response from /__/functions.yaml {"endpoints":{"emailPromo":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","region":["us-central1"],"secretEnvironmentVariables":[{"key":"RESEND_KEY"},{"key":"WEB_PUSH_PUBLIC_KEY"},{"key":"WEB_PUSH_PRIVATE_KEY"}],"labels":{},"eventTrigger":{"eventType":"google.cloud.firestore.document.v1.created","eventFilters":{"database":"(default)","namespace":"(default)"},"eventFilterPathPatterns":{"document":"wishlists/{uid}/items/{bizId}"},"retry":false},"entryPoint":"emailPromo"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{},"params":[{"type":"secret","name":"RESEND_KEY"},{"type":"secret","name":"WEB_PUSH_PUBLIC_KEY"},{"type":"secret","name":"WEB_PUSH_PRIVATE_KEY"}]}
+[info] i  extensions: ensuring required API firebaseextensions.googleapis.com is enabled... 
+[debug] [2025-07-12T20:55:59.967Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-12T20:55:59.967Z] > authorizing via signed-in user (dyq0132@gmail.com)
+[debug] [2025-07-12T20:55:59.967Z] [iam] checking project forkly-da5a7 for permissions ["firebase.projects.get","firebaseextensions.instances.list"]
+[debug] [2025-07-12T20:55:59.968Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:55:59.968Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:55:59.968Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7:testIamPermissions [none]
+[debug] [2025-07-12T20:55:59.968Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7:testIamPermissions x-goog-quota-user=projects/forkly-da5a7
+[debug] [2025-07-12T20:55:59.968Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7:testIamPermissions {"permissions":["firebase.projects.get","firebaseextensions.instances.list"]}
+[debug] [2025-07-12T20:56:02.141Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7:testIamPermissions 200
+[debug] [2025-07-12T20:56:02.141Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7:testIamPermissions {"permissions":["firebase.projects.get","firebaseextensions.instances.list"]}
+[debug] [2025-07-12T20:56:02.141Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:02.141Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:02.142Z] >>> [apiv2][query] GET https://firebaseextensions.googleapis.com/v1beta/projects/forkly-da5a7/instances pageSize=100&pageToken=
+[debug] [2025-07-12T20:56:04.669Z] <<< [apiv2][status] GET https://firebaseextensions.googleapis.com/v1beta/projects/forkly-da5a7/instances 200
+[debug] [2025-07-12T20:56:04.669Z] <<< [apiv2][body] GET https://firebaseextensions.googleapis.com/v1beta/projects/forkly-da5a7/instances {}
+[info] i  functions: Loaded environment variables from .env. 
+[info] i  functions: preparing functions directory for uploading... 
+[info] i  functions: packaged d:\forkly\functions (108.84 KB) for uploading 
+[debug] [2025-07-12T20:56:04.721Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:04.721Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:04.721Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/projects/forkly-da5a7/locations/-/functions [none]
+[debug] [2025-07-12T20:56:07.746Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/projects/forkly-da5a7/locations/-/functions 200
+[debug] [2025-07-12T20:56:07.746Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/projects/forkly-da5a7/locations/-/functions {}
+[debug] [2025-07-12T20:56:07.746Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:07.746Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:07.746Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v2/projects/forkly-da5a7/locations/-/functions filter=environment%3D%22GEN_2%22
+[debug] [2025-07-12T20:56:08.332Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v2/projects/forkly-da5a7/locations/-/functions 200
+[debug] [2025-07-12T20:56:08.332Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v2/projects/forkly-da5a7/locations/-/functions {}
+[debug] [2025-07-12T20:56:08.333Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:08.333Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:08.333Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/forkly-da5a7/databases/(default) [none]
+[debug] [2025-07-12T20:56:09.552Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/forkly-da5a7/databases/(default) 200
+[debug] [2025-07-12T20:56:09.552Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/forkly-da5a7/databases/(default) {"name":"projects/forkly-da5a7/databases/(default)","uid":"ae51a3da-eb40-4c95-bd42-d16e872d9390","createTime":"2025-07-01T20:33:14.069290Z","updateTime":"2025-07-01T20:33:14.069290Z","locationId":"nam5","type":"FIRESTORE_NATIVE","concurrencyMode":"PESSIMISTIC","versionRetentionPeriod":"3600s","earliestVersionTime":"2025-07-12T19:56:10.767835Z","appEngineIntegrationMode":"DISABLED","keyPrefix":"s","pointInTimeRecoveryEnablement":"POINT_IN_TIME_RECOVERY_DISABLED","deleteProtectionState":"DELETE_PROTECTION_DISABLED","databaseEdition":"STANDARD","freeTier":true,"etag":"II2FnMCauI4DMPHcmtSKuI4D"}
+[info] i  functions: ensuring required API run.googleapis.com is enabled... 
+[info] i  functions: ensuring required API eventarc.googleapis.com is enabled... 
+[info] i  functions: ensuring required API pubsub.googleapis.com is enabled... 
+[info] i  functions: ensuring required API storage.googleapis.com is enabled... 
+[info] i  functions: generating the service identity for pubsub.googleapis.com... 
+[debug] [2025-07-12T20:56:09.562Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:09.562Z] Checked if tokens are valid: true, expires at: 1752354899963
+[info] i  functions: generating the service identity for eventarc.googleapis.com... 
+[debug] [2025-07-12T20:56:09.563Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:09.563Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:09.563Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1beta1/projects/738393752123/services/pubsub.googleapis.com:generateServiceIdentity [none]
+[debug] [2025-07-12T20:56:09.563Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1beta1/projects/738393752123/services/pubsub.googleapis.com:generateServiceIdentity x-goog-quota-user=projects/738393752123
+[debug] [2025-07-12T20:56:09.563Z] >>> [apiv2][body] POST https://serviceusage.googleapis.com/v1beta1/projects/738393752123/services/pubsub.googleapis.com:generateServiceIdentity {}
+[debug] [2025-07-12T20:56:09.564Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1beta1/projects/738393752123/services/eventarc.googleapis.com:generateServiceIdentity [none]
+[debug] [2025-07-12T20:56:09.564Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1beta1/projects/738393752123/services/eventarc.googleapis.com:generateServiceIdentity x-goog-quota-user=projects/738393752123
+[debug] [2025-07-12T20:56:09.564Z] >>> [apiv2][body] POST https://serviceusage.googleapis.com/v1beta1/projects/738393752123/services/eventarc.googleapis.com:generateServiceIdentity {}
+[debug] [2025-07-12T20:56:12.376Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1beta1/projects/738393752123/services/eventarc.googleapis.com:generateServiceIdentity 200
+[debug] [2025-07-12T20:56:12.376Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1beta1/projects/738393752123/services/eventarc.googleapis.com:generateServiceIdentity {"name":"operations/finished.DONE_OPERATION","done":true,"response":{"@type":"type.googleapis.com/google.api.serviceusage.v1beta1.ServiceIdentity","email":"service-738393752123@gcp-sa-eventarc.iam.gserviceaccount.com","uniqueId":"107371385583953072450"}}
+[debug] [2025-07-12T20:56:12.391Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1beta1/projects/738393752123/services/pubsub.googleapis.com:generateServiceIdentity 200
+[debug] [2025-07-12T20:56:12.391Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1beta1/projects/738393752123/services/pubsub.googleapis.com:generateServiceIdentity {"name":"operations/finished.DONE_OPERATION","done":true,"response":{"@type":"type.googleapis.com/google.api.serviceusage.v1beta1.ServiceIdentity","email":"service-738393752123@gcp-sa-pubsub.iam.gserviceaccount.com","uniqueId":"112551654675384557367"}}
+[info] i  functions: ensuring required API secretmanager.googleapis.com is enabled... 
+[debug] [2025-07-12T20:56:12.394Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:12.394Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:12.394Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:12.394Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:12.394Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:12.394Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:12.394Z] >>> [apiv2][query] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/RESEND_KEY/versions/latest [none]
+[debug] [2025-07-12T20:56:12.395Z] >>> [apiv2][query] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/WEB_PUSH_PUBLIC_KEY/versions/latest [none]
+[debug] [2025-07-12T20:56:12.395Z] >>> [apiv2][query] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/WEB_PUSH_PRIVATE_KEY/versions/latest [none]
+[debug] [2025-07-12T20:56:15.029Z] <<< [apiv2][status] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/WEB_PUSH_PRIVATE_KEY/versions/latest 200
+[debug] [2025-07-12T20:56:15.029Z] <<< [apiv2][body] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/WEB_PUSH_PRIVATE_KEY/versions/latest {"name":"projects/738393752123/secrets/WEB_PUSH_PRIVATE_KEY/versions/1","createTime":"2025-07-12T16:02:12.369063Z","state":"ENABLED","replicationStatus":{"automatic":{}},"etag":"\"1639bd8cb26aa7\""}
+[debug] [2025-07-12T20:56:15.029Z] Resolved secret version of WEB_PUSH_PRIVATE_KEY to 1.
+[debug] [2025-07-12T20:56:15.043Z] <<< [apiv2][status] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/WEB_PUSH_PUBLIC_KEY/versions/latest 200
+[debug] [2025-07-12T20:56:15.043Z] <<< [apiv2][body] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/WEB_PUSH_PUBLIC_KEY/versions/latest {"name":"projects/738393752123/secrets/WEB_PUSH_PUBLIC_KEY/versions/1","createTime":"2025-07-12T16:00:41.106053Z","state":"ENABLED","replicationStatus":{"automatic":{}},"etag":"\"1639bd8741da85\""}
+[debug] [2025-07-12T20:56:15.043Z] Resolved secret version of WEB_PUSH_PUBLIC_KEY to 1.
+[debug] [2025-07-12T20:56:15.053Z] <<< [apiv2][status] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/RESEND_KEY/versions/latest 200
+[debug] [2025-07-12T20:56:15.053Z] <<< [apiv2][body] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/RESEND_KEY/versions/latest {"name":"projects/738393752123/secrets/RESEND_KEY/versions/2","createTime":"2025-07-10T21:27:24.591687Z","state":"ENABLED","replicationStatus":{"automatic":{}},"etag":"\"163999dc088e47\""}
+[debug] [2025-07-12T20:56:15.053Z] Resolved secret version of RESEND_KEY to 2.
+[debug] [2025-07-12T20:56:15.054Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:15.054Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:15.054Z] >>> [apiv2][query] GET https://compute.googleapis.com/compute/v1/projects/738393752123 [none]
+[debug] [2025-07-12T20:56:16.174Z] <<< [apiv2][status] GET https://compute.googleapis.com/compute/v1/projects/738393752123 403
+[debug] [2025-07-12T20:56:16.174Z] <<< [apiv2][body] GET https://compute.googleapis.com/compute/v1/projects/738393752123 {"error":{"code":403,"message":"Compute Engine API has not been used in project 738393752123 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","errors":[{"message":"Compute Engine API has not been used in project 738393752123 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","domain":"usageLimits","reason":"accessNotConfigured","extendedHelp":"https://console.developers.google.com"}],"status":"PERMISSION_DENIED","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"SERVICE_DISABLED","domain":"googleapis.com","metadata":{"service":"compute.googleapis.com","consumer":"projects/738393752123","activationUrl":"https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123","containerInfo":"738393752123","serviceTitle":"Compute Engine API"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Compute Engine API has not been used in project 738393752123 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Google developers console API activation","url":"https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123"}]}]}}
+[debug] [2025-07-12T20:56:16.174Z] unable to look up default compute service account. Falling back to 738393752123-compute@developer.gserviceaccount.com. Error: {"name":"FirebaseError","children":[],"context":{"body":{"error":{"code":403,"message":"Compute Engine API has not been used in project 738393752123 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","errors":[{"message":"Compute Engine API has not been used in project 738393752123 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","domain":"usageLimits","reason":"accessNotConfigured","extendedHelp":"https://console.developers.google.com"}],"status":"PERMISSION_DENIED","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"SERVICE_DISABLED","domain":"googleapis.com","metadata":{"service":"compute.googleapis.com","consumer":"projects/738393752123","activationUrl":"https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123","containerInfo":"738393752123","serviceTitle":"Compute Engine API"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Compute Engine API has not been used in project 738393752123 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Google developers console API activation","url":"https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123"}]}]}},"response":{"statusCode":403}},"exit":1,"message":"Request to https://compute.googleapis.com/compute/v1/projects/738393752123 had HTTP Error: 403, Compute Engine API has not been used in project 738393752123 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","status":403}
+[debug] [2025-07-12T20:56:16.174Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:16.174Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:16.175Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/738393752123:getIamPolicy [none]
+[debug] [2025-07-12T20:56:18.401Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/738393752123:getIamPolicy 200
+[debug] [2025-07-12T20:56:18.402Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/738393752123:getIamPolicy {"version":1,"etag":"BwY5waLQpOA=","bindings":[{"role":"roles/artifactregistry.serviceAgent","members":["serviceAccount:service-738393752123@gcp-sa-artifactregistry.iam.gserviceaccount.com"]},{"role":"roles/cloudbuild.builds.builder","members":["serviceAccount:738393752123@cloudbuild.gserviceaccount.com"]},{"role":"roles/cloudbuild.serviceAgent","members":["serviceAccount:service-738393752123@gcp-sa-cloudbuild.iam.gserviceaccount.com"]},{"role":"roles/cloudfunctions.serviceAgent","members":["serviceAccount:service-738393752123@gcf-admin-robot.iam.gserviceaccount.com"]},{"role":"roles/containerregistry.ServiceAgent","members":["serviceAccount:service-738393752123@containerregistry.iam.gserviceaccount.com"]},{"role":"roles/editor","members":["serviceAccount:738393752123-compute@developer.gserviceaccount.com","serviceAccount:738393752123@cloudservices.gserviceaccount.com","serviceAccount:forkly-da5a7@appspot.gserviceaccount.com"]},{"role":"roles/eventarc.eventReceiver","members":["serviceAccount:738393752123-compute@developer.gserviceaccount.com"]},{"role":"roles/eventarc.serviceAgent","members":["serviceAccount:service-738393752123@gcp-sa-eventarc.iam.gserviceaccount.com"]},{"role":"roles/firebase.managementServiceAgent","members":["serviceAccount:service-738393752123@gcp-sa-firebase.iam.gserviceaccount.com"]},{"role":"roles/firebase.sdkAdminServiceAgent","members":["serviceAccount:firebase-adminsdk-fbsvc@forkly-da5a7.iam.gserviceaccount.com"]},{"role":"roles/firebasemods.serviceAgent","members":["serviceAccount:service-738393752123@gcp-sa-firebasemods.iam.gserviceaccount.com"]},{"role":"roles/firebaserules.system","members":["serviceAccount:service-738393752123@firebase-rules.iam.gserviceaccount.com"]},{"role":"roles/firestore.serviceAgent","members":["serviceAccount:service-738393752123@gcp-sa-firestore.iam.gserviceaccount.com"]},{"role":"roles/iam.serviceAccountTokenCreator","members":["serviceAccount:firebase-adminsdk-fbsvc@forkly-da5a7.iam.gserviceaccount.com","serviceAccount:service-738393752123@gcp-sa-pubsub.iam.gserviceaccount.com"]},{"role":"roles/owner","members":["user:dyq0132@gmail.com"]},{"role":"roles/run.invoker","members":["serviceAccount:738393752123-compute@developer.gserviceaccount.com"]},{"role":"roles/run.serviceAgent","members":["serviceAccount:service-738393752123@serverless-robot-prod.iam.gserviceaccount.com"]},{"role":"roles/secretmanager.secretAccessor","members":["serviceAccount:service-738393752123@gcf-admin-robot.iam.gserviceaccount.com"]}]}
+[debug] [2025-07-12T20:56:18.403Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:18.403Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:18.403Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7 [none]
+[debug] [2025-07-12T20:56:18.733Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7 200
+[debug] [2025-07-12T20:56:18.733Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/forkly-da5a7 {"projectNumber":"738393752123","projectId":"forkly-da5a7","lifecycleState":"ACTIVE","name":"Forkly","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2025-07-01T20:24:13.196809Z"}
+[debug] [2025-07-12T20:56:18.733Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:18.733Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:18.733Z] >>> [apiv2][query] GET https://compute.googleapis.com/compute/v1/projects/738393752123 [none]
+[debug] [2025-07-12T20:56:19.032Z] <<< [apiv2][status] GET https://compute.googleapis.com/compute/v1/projects/738393752123 403
+[debug] [2025-07-12T20:56:19.032Z] <<< [apiv2][body] GET https://compute.googleapis.com/compute/v1/projects/738393752123 {"error":{"code":403,"message":"Compute Engine API has not been used in project 738393752123 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","errors":[{"message":"Compute Engine API has not been used in project 738393752123 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","domain":"usageLimits","reason":"accessNotConfigured","extendedHelp":"https://console.developers.google.com"}],"status":"PERMISSION_DENIED","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"SERVICE_DISABLED","domain":"googleapis.com","metadata":{"activationUrl":"https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123","serviceTitle":"Compute Engine API","containerInfo":"738393752123","service":"compute.googleapis.com","consumer":"projects/738393752123"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Compute Engine API has not been used in project 738393752123 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Google developers console API activation","url":"https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123"}]}]}}
+[debug] [2025-07-12T20:56:19.032Z] unable to look up default compute service account. Falling back to 738393752123-compute@developer.gserviceaccount.com. Error: {"name":"FirebaseError","children":[],"context":{"body":{"error":{"code":403,"message":"Compute Engine API has not been used in project 738393752123 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","errors":[{"message":"Compute Engine API has not been used in project 738393752123 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","domain":"usageLimits","reason":"accessNotConfigured","extendedHelp":"https://console.developers.google.com"}],"status":"PERMISSION_DENIED","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"SERVICE_DISABLED","domain":"googleapis.com","metadata":{"activationUrl":"https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123","serviceTitle":"Compute Engine API","containerInfo":"738393752123","service":"compute.googleapis.com","consumer":"projects/738393752123"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Compute Engine API has not been used in project 738393752123 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Google developers console API activation","url":"https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123"}]}]}},"response":{"statusCode":403}},"exit":1,"message":"Request to https://compute.googleapis.com/compute/v1/projects/738393752123 had HTTP Error: 403, Compute Engine API has not been used in project 738393752123 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/compute.googleapis.com/overview?project=738393752123 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","status":403}
+[info] i  functions: ensuring 738393752123-compute@developer.gserviceaccount.com access to secret RESEND_KEY. 
+[debug] [2025-07-12T20:56:19.034Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:19.034Z] Checked if tokens are valid: true, expires at: 1752354899963
+[info] i  functions: ensuring 738393752123-compute@developer.gserviceaccount.com access to secret WEB_PUSH_PUBLIC_KEY. 
+[debug] [2025-07-12T20:56:19.037Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:19.037Z] Checked if tokens are valid: true, expires at: 1752354899963
+[info] i  functions: ensuring 738393752123-compute@developer.gserviceaccount.com access to secret WEB_PUSH_PRIVATE_KEY. 
+[debug] [2025-07-12T20:56:19.038Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:19.038Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:19.038Z] >>> [apiv2][query] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/RESEND_KEY:getIamPolicy [none]
+[debug] [2025-07-12T20:56:19.038Z] >>> [apiv2][query] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/WEB_PUSH_PUBLIC_KEY:getIamPolicy [none]
+[debug] [2025-07-12T20:56:19.038Z] >>> [apiv2][query] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/WEB_PUSH_PRIVATE_KEY:getIamPolicy [none]
+[debug] [2025-07-12T20:56:19.400Z] <<< [apiv2][status] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/WEB_PUSH_PRIVATE_KEY:getIamPolicy 200
+[debug] [2025-07-12T20:56:19.400Z] <<< [apiv2][body] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/WEB_PUSH_PRIVATE_KEY:getIamPolicy {"version":1,"etag":"BwY5vZdUm+Q=","bindings":[{"role":"roles/secretmanager.secretAccessor","members":["serviceAccount:738393752123-compute@developer.gserviceaccount.com"]}]}
+[info] +  secretmanager: Granted roles/secretmanager.secretAccessor on projects/forkly-da5a7/secrets/WEB_PUSH_PRIVATE_KEY to 738393752123-compute@developer.gserviceaccount.com 
+[info] +  functions: ensured 738393752123-compute@developer.gserviceaccount.com access to WEB_PUSH_PRIVATE_KEY. 
+[debug] [2025-07-12T20:56:19.407Z] <<< [apiv2][status] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/WEB_PUSH_PUBLIC_KEY:getIamPolicy 200
+[debug] [2025-07-12T20:56:19.407Z] <<< [apiv2][body] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/WEB_PUSH_PUBLIC_KEY:getIamPolicy {"version":1,"etag":"BwY5vZdUpyU=","bindings":[{"role":"roles/secretmanager.secretAccessor","members":["serviceAccount:738393752123-compute@developer.gserviceaccount.com"]}]}
+[info] +  secretmanager: Granted roles/secretmanager.secretAccessor on projects/forkly-da5a7/secrets/WEB_PUSH_PUBLIC_KEY to 738393752123-compute@developer.gserviceaccount.com 
+[info] +  functions: ensured 738393752123-compute@developer.gserviceaccount.com access to WEB_PUSH_PUBLIC_KEY. 
+[debug] [2025-07-12T20:56:19.410Z] <<< [apiv2][status] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/RESEND_KEY:getIamPolicy 200
+[debug] [2025-07-12T20:56:19.411Z] <<< [apiv2][body] GET https://secretmanager.googleapis.com/v1/projects/forkly-da5a7/secrets/RESEND_KEY:getIamPolicy {"version":1,"etag":"BwY5md9X2Dg=","bindings":[{"role":"roles/secretmanager.secretAccessor","members":["serviceAccount:738393752123-compute@developer.gserviceaccount.com"]}]}
+[info] +  secretmanager: Granted roles/secretmanager.secretAccessor on projects/forkly-da5a7/secrets/RESEND_KEY to 738393752123-compute@developer.gserviceaccount.com 
+[info] +  functions: ensured 738393752123-compute@developer.gserviceaccount.com access to RESEND_KEY. 
+[debug] [2025-07-12T20:56:19.414Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:19.414Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:19.414Z] >>> [apiv2][query] GET https://cloudbilling.googleapis.com/v1/projects/forkly-da5a7/billingInfo [none]
+[debug] [2025-07-12T20:56:22.074Z] <<< [apiv2][status] GET https://cloudbilling.googleapis.com/v1/projects/forkly-da5a7/billingInfo 200
+[debug] [2025-07-12T20:56:22.074Z] <<< [apiv2][body] GET https://cloudbilling.googleapis.com/v1/projects/forkly-da5a7/billingInfo {"name":"projects/forkly-da5a7/billingInfo","projectId":"forkly-da5a7","billingAccountName":"billingAccounts/015E2D-9D446D-FF65B2","billingEnabled":true}
+[debug] [2025-07-12T20:56:22.075Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:22.075Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:22.075Z] >>> [apiv2][query] POST https://cloudfunctions.googleapis.com/v2/projects/forkly-da5a7/locations/us-central1/functions:generateUploadUrl [none]
+[debug] [2025-07-12T20:56:24.587Z] <<< [apiv2][status] POST https://cloudfunctions.googleapis.com/v2/projects/forkly-da5a7/locations/us-central1/functions:generateUploadUrl 200
+[debug] [2025-07-12T20:56:24.587Z] <<< [apiv2][body] POST https://cloudfunctions.googleapis.com/v2/projects/forkly-da5a7/locations/us-central1/functions:generateUploadUrl {"uploadUrl":"https://storage.googleapis.com/gcf-v2-uploads-738393752123.us-central1.cloudfunctions.appspot.com/7efbc541-424a-4c2b-aae9-6ef441ee4700.zip?GoogleAccessId=service-738393752123@gcf-admin-robot.iam.gserviceaccount.com&Expires=1752355585&Signature=gJu8dTbQrFmyVVQWLrQMbi1eSWWuPGtuuwofnjD7C8W9uUalgNrkT7j8x88BRNR1SpJwMPaXM85T8lcF2unAZIUHeK%2BMMOKMc7Ifd%2FVSgCDslqkcVtapbCdMzQ4r%2B19Zko2V6pL7YfRBkANrn%2BEbkHmVGvDBr%2FDTNro0jeCBgbJdUNQMHo6EbbuDBblTNV6zTmwd619%2Ff3kfBuBcXkYR%2B5jxcJACAGuP74qqkoZHojsK3aURanZzvksjBSckws%2BPZNfP%2BNGzxLhwY6KqEHaYLkyLjHUJ4RynDg%2FLK3Ls4Y%2FOIAIcPHqjaw%2BzK2VgVLdH3y2dt%2Bk33vcB6jKfeHXN3w%3D%3D","storageSource":{"bucket":"gcf-v2-uploads-738393752123.us-central1.cloudfunctions.appspot.com","object":"7efbc541-424a-4c2b-aae9-6ef441ee4700.zip"}}
+[debug] [2025-07-12T20:56:24.587Z] >>> [apiv2][query] PUT https://storage.googleapis.com/gcf-v2-uploads-738393752123.us-central1.cloudfunctions.appspot.com/7efbc541-424a-4c2b-aae9-6ef441ee4700.zip GoogleAccessId=service-738393752123%40gcf-admin-robot.iam.gserviceaccount.com&Expires=1752355585&Signature=gJu8dTbQrFmyVVQWLrQMbi1eSWWuPGtuuwofnjD7C8W9uUalgNrkT7j8x88BRNR1SpJwMPaXM85T8lcF2unAZIUHeK%2BMMOKMc7Ifd%2FVSgCDslqkcVtapbCdMzQ4r%2B19Zko2V6pL7YfRBkANrn%2BEbkHmVGvDBr%2FDTNro0jeCBgbJdUNQMHo6EbbuDBblTNV6zTmwd619%2Ff3kfBuBcXkYR%2B5jxcJACAGuP74qqkoZHojsK3aURanZzvksjBSckws%2BPZNfP%2BNGzxLhwY6KqEHaYLkyLjHUJ4RynDg%2FLK3Ls4Y%2FOIAIcPHqjaw%2BzK2VgVLdH3y2dt%2Bk33vcB6jKfeHXN3w%3D%3D
+[debug] [2025-07-12T20:56:24.587Z] >>> [apiv2][body] PUT https://storage.googleapis.com/gcf-v2-uploads-738393752123.us-central1.cloudfunctions.appspot.com/7efbc541-424a-4c2b-aae9-6ef441ee4700.zip [stream]
+[debug] [2025-07-12T20:56:28.081Z] <<< [apiv2][status] PUT https://storage.googleapis.com/gcf-v2-uploads-738393752123.us-central1.cloudfunctions.appspot.com/7efbc541-424a-4c2b-aae9-6ef441ee4700.zip 200
+[debug] [2025-07-12T20:56:28.082Z] <<< [apiv2][body] PUT https://storage.googleapis.com/gcf-v2-uploads-738393752123.us-central1.cloudfunctions.appspot.com/7efbc541-424a-4c2b-aae9-6ef441ee4700.zip [omitted]
+[info] +  functions: functions folder uploaded successfully 
+[info] i  functions: creating Node.js 20 (2nd Gen) function emailPromo(us-central1)... 
+[debug] [2025-07-12T20:56:28.088Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:28.088Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:28.088Z] >>> [apiv2][query] POST https://cloudfunctions.googleapis.com/v2/projects/forkly-da5a7/locations/us-central1/functions functionId=emailPromo
+[debug] [2025-07-12T20:56:28.088Z] >>> [apiv2][body] POST https://cloudfunctions.googleapis.com/v2/projects/forkly-da5a7/locations/us-central1/functions {"name":"projects/forkly-da5a7/locations/us-central1/functions/emailPromo","buildConfig":{"runtime":"nodejs20","entryPoint":"emailPromo","source":{"storageSource":{"bucket":"gcf-v2-uploads-738393752123.us-central1.cloudfunctions.appspot.com","object":"7efbc541-424a-4c2b-aae9-6ef441ee4700.zip"}},"environmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""}},"serviceConfig":{"environmentVariables":{"RESEND_KEY":"re_fZe9V1Ew_6mqzVvQpPuEEW1HEJPa9GrUs","WEB_PUSH_PUBLIC_KEY":"BFSVt_dTIzVOMbz9hZMzP87B1TzEAwkS1lcyxcDjh42ZBrjXiyLfgZmrgvABLpgQYypYADvO-8oGDLrekUK4gDs","WEB_PUSH_PRIVATE_KEY":"lV9LM-TKldXeMTq51DlTjc5aUag7NisU3JF3cDLsu2w","FIREBASE_CONFIG":"{\"projectId\":\"forkly-da5a7\",\"storageBucket\":\"forkly-da5a7.firebasestorage.app\"}","GCLOUD_PROJECT":"forkly-da5a7","EVENTARC_CLOUD_EVENT_SOURCE":"projects/forkly-da5a7/locations/us-central1/services/emailPromo","FUNCTION_SIGNATURE_TYPE":"cloudevent","FUNCTION_TARGET":"emailPromo","LOG_EXECUTION_ID":"true"},"secretEnvironmentVariables":[{"key":"RESEND_KEY","secret":"RESEND_KEY","projectId":"forkly-da5a7","version":"2"},{"key":"WEB_PUSH_PUBLIC_KEY","secret":"WEB_PUSH_PUBLIC_KEY","projectId":"forkly-da5a7","version":"1"},{"key":"WEB_PUSH_PRIVATE_KEY","secret":"WEB_PUSH_PRIVATE_KEY","projectId":"forkly-da5a7","version":"1"}],"ingressSettings":null,"timeoutSeconds":null,"serviceAccountEmail":null,"availableMemory":"256Mi","minInstanceCount":null,"maxInstanceCount":null,"maxInstanceRequestConcurrency":80,"availableCpu":"1","vpcConnector":null,"vpcConnectorEgressSettings":null},"labels":{"deployment-tool":"cli-firebase","firebase-functions-hash":"29e0777332459b198dbcbc39b4eb7cae35e150e8"},"eventTrigger":{"eventType":"google.cloud.firestore.document.v1.created","retryPolicy":"RETRY_POLICY_DO_NOT_RETRY","eventFilters":[{"attribute":"database","value":"(default)"},{"attribute":"namespace","value":"(default)"},{"attribute":"document","value":"wishlists/{uid}/items/{bizId}","operator":"match-path-pattern"}],"triggerRegion":"nam5"}}
+[debug] [2025-07-12T20:56:29.285Z] <<< [apiv2][status] POST https://cloudfunctions.googleapis.com/v2/projects/forkly-da5a7/locations/us-central1/functions 400
+[debug] [2025-07-12T20:56:29.286Z] <<< [apiv2][body] POST https://cloudfunctions.googleapis.com/v2/projects/forkly-da5a7/locations/us-central1/functions {"error":{"code":400,"message":"Could not create Cloud Run service emailpromo. spec.template.spec.containers[0].env: Secret environment variable overlaps non secret environment variable: RESEND_KEY","status":"INVALID_ARGUMENT"}}
+[warn] !  functions: Request to https://cloudfunctions.googleapis.com/v2/projects/forkly-da5a7/locations/us-central1/functions?functionId=emailPromo had HTTP Error: 400, Could not create Cloud Run service emailpromo. spec.template.spec.containers[0].env: Secret environment variable overlaps non secret environment variable: RESEND_KEY 
+[warn] !  functions:  failed to create function projects/forkly-da5a7/locations/us-central1/functions/emailPromo 
+[error] Failed to create function projects/forkly-da5a7/locations/us-central1/functions/emailPromo
+[debug] [2025-07-12T20:56:29.296Z] Total Function Deployment time: 1205
+[debug] [2025-07-12T20:56:29.296Z] 1 Functions Deployed
+[debug] [2025-07-12T20:56:29.296Z] 1 Functions Errored
+[debug] [2025-07-12T20:56:29.296Z] 0 Function Deployments Aborted
+[debug] [2025-07-12T20:56:29.296Z] Average Function Deployment time: 1204
+[info] 
+[info] Functions deploy had errors with the following functions:
+	emailPromo(us-central1)
+[debug] [2025-07-12T20:56:31.655Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:31.655Z] Checked if tokens are valid: true, expires at: 1752354899963
+[debug] [2025-07-12T20:56:31.655Z] >>> [apiv2][query] GET https://artifactregistry.googleapis.com/v1/projects/forkly-da5a7/locations/us-central1/repositories/gcf-artifacts [none]
+[debug] [2025-07-12T20:56:34.118Z] <<< [apiv2][status] GET https://artifactregistry.googleapis.com/v1/projects/forkly-da5a7/locations/us-central1/repositories/gcf-artifacts 200
+[debug] [2025-07-12T20:56:34.119Z] <<< [apiv2][body] GET https://artifactregistry.googleapis.com/v1/projects/forkly-da5a7/locations/us-central1/repositories/gcf-artifacts {"name":"projects/forkly-da5a7/locations/us-central1/repositories/gcf-artifacts","format":"DOCKER","description":"This repository is created and used by Cloud Functions for storing function docker images.","labels":{"goog-managed-by":"cloudfunctions"},"createTime":"2025-07-09T19:43:59.876557Z","updateTime":"2025-07-12T17:17:44.272339Z","mode":"STANDARD_REPOSITORY","cleanupPolicies":{"firebase-functions-cleanup":{"id":"firebase-functions-cleanup","action":"DELETE","condition":{"tagState":"ANY","olderThan":"2592000s"}}},"vulnerabilityScanningConfig":{"lastEnableTime":"2025-07-09T19:43:50.942015355Z","enablementState":"SCANNING_DISABLED","enablementStateReason":"API containerscanning.googleapis.com is not enabled."},"satisfiesPzi":true,"registryUri":"us-central1-docker.pkg.dev/forkly-da5a7/gcf-artifacts"}
+[debug] [2025-07-12T20:56:34.119Z] Functions deploy failed.
+[debug] [2025-07-12T20:56:34.119Z] {
+  "endpoint": {
+    "id": "emailPromo",
+    "project": "forkly-da5a7",
+    "region": "us-central1",
+    "entryPoint": "emailPromo",
+    "platform": "gcfv2",
+    "runtime": "nodejs20",
+    "eventTrigger": {
+      "eventType": "google.cloud.firestore.document.v1.created",
+      "retry": false,
+      "eventFilters": {
+        "database": "(default)",
+        "namespace": "(default)"
+      },
+      "eventFilterPathPatterns": {
+        "document": "wishlists/{uid}/items/{bizId}"
+      },
+      "region": "nam5"
+    },
+    "labels": {
+      "deployment-tool": "cli-firebase"
+    },
+    "secretEnvironmentVariables": [
+      {
+        "key": "RESEND_KEY",
+        "secret": "RESEND_KEY",
+        "projectId": "forkly-da5a7",
+        "version": "2"
+      },
+      {
+        "key": "WEB_PUSH_PUBLIC_KEY",
+        "secret": "WEB_PUSH_PUBLIC_KEY",
+        "projectId": "forkly-da5a7",
+        "version": "1"
+      },
+      {
+        "key": "WEB_PUSH_PRIVATE_KEY",
+        "secret": "WEB_PUSH_PRIVATE_KEY",
+        "projectId": "forkly-da5a7",
+        "version": "1"
+      }
+    ],
+    "serviceAccount": null,
+    "ingressSettings": null,
+    "availableMemoryMb": null,
+    "timeoutSeconds": null,
+    "maxInstances": null,
+    "minInstances": null,
+    "concurrency": 80,
+    "vpc": null,
+    "environmentVariables": {
+      "RESEND_KEY": "re_fZe9V1Ew_6mqzVvQpPuEEW1HEJPa9GrUs",
+      "WEB_PUSH_PUBLIC_KEY": "BFSVt_dTIzVOMbz9hZMzP87B1TzEAwkS1lcyxcDjh42ZBrjXiyLfgZmrgvABLpgQYypYADvO-8oGDLrekUK4gDs",
+      "WEB_PUSH_PRIVATE_KEY": "lV9LM-TKldXeMTq51DlTjc5aUag7NisU3JF3cDLsu2w",
+      "FIREBASE_CONFIG": "{\"projectId\":\"forkly-da5a7\",\"storageBucket\":\"forkly-da5a7.firebasestorage.app\"}",
+      "GCLOUD_PROJECT": "forkly-da5a7",
+      "EVENTARC_CLOUD_EVENT_SOURCE": "projects/forkly-da5a7/locations/us-central1/services/emailPromo"
+    },
+    "codebase": "default",
+    "cpu": 1,
+    "targetedByOnly": true,
+    "hash": "29e0777332459b198dbcbc39b4eb7cae35e150e8"
+  },
+  "op": "create",
+  "original": {
+    "name": "FirebaseError",
+    "children": [],
+    "context": {
+      "function": "projects/forkly-da5a7/locations/us-central1/functions/emailPromo"
+    },
+    "exit": 1,
+    "message": "Failed to create function projects/forkly-da5a7/locations/us-central1/functions/emailPromo",
+    "original": {
+      "name": "FirebaseError",
+      "children": [],
+      "context": {
+        "body": {
+          "error": {
+            "code": 400,
+            "message": "Could not create Cloud Run service emailpromo. spec.template.spec.containers[0].env: Secret environment variable overlaps non secret environment variable: RESEND_KEY",
+            "status": "INVALID_ARGUMENT"
+          }
+        },
+        "response": {
+          "statusCode": 400
+        }
+      },
+      "exit": 1,
+      "message": "Request to https://cloudfunctions.googleapis.com/v2/projects/forkly-da5a7/locations/us-central1/functions?functionId=emailPromo had HTTP Error: 400, Could not create Cloud Run service emailpromo. spec.template.spec.containers[0].env: Secret environment variable overlaps non secret environment variable: RESEND_KEY",
+      "status": 400
+    },
+    "status": 400,
+    "code": 400
+  }
+}
+[debug] [2025-07-12T20:56:34.405Z] Error: Failed to create function emailPromo in region us-central1
+    at C:\Users\dbare\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\release\fabricator.js:294:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Fabricator.createV2Function (C:\Users\dbare\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\release\fabricator.js:278:30)
+    at async Fabricator.createEndpoint (C:\Users\dbare\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\release\fabricator.js:137:13)
+    at async handle (C:\Users\dbare\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\release\fabricator.js:89:17)
+[error] 
+[error] Error: There was an error deploying functions
