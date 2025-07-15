@@ -1,4 +1,4 @@
-// functions/src/index.ts
+// D:\forkly\functions\src\index.ts
 import { defineSecret } from 'firebase-functions/params';
 import { onDocumentCreated } from 'firebase-functions/v2/firestore';
 import { Resend } from 'resend';
@@ -9,12 +9,12 @@ import React from 'react';
 import webpush from 'web-push';
 import { Expo } from 'expo-server-sdk';
 
+// Define Secrets at the top level
 const resendApiKey = defineSecret('RESEND_KEY');
 const webPushPublicKey = defineSecret('WEB_PUSH_PUBLIC_KEY');
 const webPushPrivateKey = defineSecret('WEB_PUSH_PRIVATE_KEY');
 
 admin.initializeApp();
-
 const expo = new Expo();
 
 export const emailPromo = onDocumentCreated(
@@ -26,6 +26,7 @@ export const emailPromo = onDocumentCreated(
   async (event) => {
     const { uid, bizId } = event.params;
 
+    const resend = new Resend(resendApiKey.value());
     webpush.setVapidDetails(
       'mailto:support@forkly.app',
       webPushPublicKey.value(),
@@ -36,18 +37,16 @@ export const emailPromo = onDocumentCreated(
     const itemSnap = await itemRef.get();
     const lastNotified = itemSnap.get('lastNotified');
 
+    if (lastNotified) {
+      console.log(`Already notified for ${bizId}, skipping.`);
+      return;
+    }
+
     const userDoc = await admin.firestore().doc(`users/${uid}`).get();
     const name = userDoc.get('name') || 'Friend';
     const email = userDoc.get('email') as string | undefined;
     const expoToken = userDoc.get('expoPushToken') as string | undefined;
     const webPushSubscription = userDoc.get('webPushSubscription') as webpush.PushSubscription | undefined;
-
-    const resend = new Resend(resendApiKey.value());
-
-    if (lastNotified) {
-      console.log(`Already notified for ${bizId}, skipping.`);
-      return;
-    }
 
     try {
       if (email) {
@@ -86,13 +85,14 @@ export const emailPromo = onDocumentCreated(
               title: `🍽️ New deal on ${bizId}`,
               body: 'Check your wishlist for a new restaurant promo!',
               icon: 'https://forkly.app/icon.png',
-              url: `https://forkly.app/wishlist?bizId=${bizId}`, 
+              url: `https://forkly.app/wishlist?bizId=${bizId}`,
             })
           );
           console.log(`Web push notification sent to ${uid} for ${bizId}`);
         } catch (webPushError) {
           if (webPushError instanceof webpush.WebPushError && webPushError.statusCode === 410) {
             console.warn(`Web Push subscription for ${uid} is expired. Removing.`);
+            // TODO: Implement logic to remove the expired subscription from userDoc
           } else {
             console.error(`Failed to send Web Push to ${uid}:`, webPushError);
           }
@@ -101,7 +101,7 @@ export const emailPromo = onDocumentCreated(
         console.log(`No Web Push subscription found for user ${uid}, skipping web push.`);
       }
 
-       await itemRef.update({
+        await itemRef.update({
         lastNotified: admin.firestore.FieldValue.serverTimestamp(),
       });
 
