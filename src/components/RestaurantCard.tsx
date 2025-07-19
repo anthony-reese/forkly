@@ -21,8 +21,8 @@ function SaveButton({ bizId }: { bizId: string }) {
 
   const handleSave = async () => {
     try {
-      await addToWishlist(user.uid, bizId);   // ← arguments here
-      toast.success('Added to wishlist!');     // ← toast here
+      await addToWishlist(user.uid, bizId);
+      toast.success('Added to wishlist!');
     } catch (err) {
       toast.error('Could not save, try again.');
       console.error(err);
@@ -64,7 +64,9 @@ export default function RestaurantCard({
   photoUrl,
 }: Props) {
   return (
-    <article className="flex flex-col h-full rounded-xl border shadow transition">
+    <article className="flex flex-col h-full rounded-xl border shadow transition"
+      data-testid="restaurant-card"
+    >
       {/* thumbnail */}
       <div className="relative h-32 sm:h-40 w-full">
         <Image

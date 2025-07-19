@@ -35,8 +35,12 @@ export default function SearchBar({
         className="h-10 flex-1 border p-2 rounded bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100"
       />
       <button
-        onClick={() => onSearch(term, location)}
+        onClick={() => {
+          if (!location.trim()) return;
+          onSearch(term, location);
+        }}
         className="h-10 px-4 bg-indigo-600 text-white rounded"
+        disabled={!term || !location}
       >
         Search
       </button>

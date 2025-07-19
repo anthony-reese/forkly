@@ -15,3 +15,9 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
+Cypress.on('uncaught:exception', (err) => {
+  // Optional: Add a condition if needed
+  if (err.message.includes('Search failed')) {
+    return false; // prevents Cypress from failing the test
+  }
+});

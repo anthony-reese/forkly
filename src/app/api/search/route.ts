@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
 
-  const term       = searchParams.get('term')       ?? 'restaurants';
+  const term       = searchParams.get('term') ?? 'restaurants';
   const location   = searchParams.get('location');
   const latitude   = searchParams.get('latitude');
   const longitude  = searchParams.get('longitude');
@@ -13,7 +13,6 @@ export async function GET(req: Request) {
   const limit      = searchParams.get('limit')  ?? '10';
   const offset     = searchParams.get('offset') ?? '0';
 
-  // Rule: use EITHER (lat,lon) OR location
   if (!(latitude && longitude) && !location) {
     return NextResponse.json(
       { error: 'Need either location or latitude+longitude' },
