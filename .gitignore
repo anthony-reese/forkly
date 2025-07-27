@@ -45,5 +45,4 @@ next-env.d.ts
 pglite-debug.log
 git
 dist/
-lib/
-pglite-debug.logfunctions/.next/
+functions/.next/

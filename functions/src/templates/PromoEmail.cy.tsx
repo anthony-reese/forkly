@@ -1,9 +1,10 @@
+/// <reference types="cypress" />
+
 import React from 'react'
 import { PromoEmail } from './PromoEmail'
 
-describe('<PromoEmail />', () => {
+describe('PromoEmail', () => {
   it('renders', () => {
-    // see: https://on.cypress.io/mounting-react
-    cy.mount(<PromoEmail />)
-  })
-})
+    cy.mount(<PromoEmail name="Forkly" bizName="Forkly" />);
+  });
+});

@@ -1,6 +1,7 @@
 // cypress/support/index.d.ts
 
 import { Auth } from 'firebase/auth';
+import './component'
 
 declare global {
   namespace Cypress {
