@@ -1,10 +1,11 @@
 // src/components/RestaurantCard.tsx
 import Image from 'next/image';
-import { Star, StarHalf, Star as StarOutline } from 'lucide-react';
-import { priceColor } from '../app/helpers/priceColor';
+import { Star, StarHalf } from 'lucide-react'; // Simplified Star import
+import { priceColor } from '@/app/helpers/priceColor'; // Refactored import path
 import { toast } from 'react-hot-toast';
 import { addToWishlist } from '@/lib/wishlist';
 import { useUser } from './AuthProvider';
+import { useState } from 'react'; // Import useState for local loading state
 
 type Props = {
   id: string;
@@ -16,40 +17,50 @@ type Props = {
 };
 
 function SaveButton({ bizId }: { bizId: string }) {
-  const user = useUser();
-  if (!user) return null;
+  const { user, loading: authLoading } = useUser();
+  const [isSaving, setIsSaving] = useState(false);
+
+  if (authLoading || !user) {
+    return null;
+  }
 
   const handleSave = async () => {
+    setIsSaving(true);
     try {
       await addToWishlist(user.uid, bizId);
       toast.success('Added to wishlist!');
     } catch (err) {
       toast.error('Could not save, try again.');
-      console.error(err);
+      console.error('Error adding to wishlist:', err);
+    } finally {
+      setIsSaving(false);
     }
   };
 
   return (
     <button
-      onClick={handleSave}
-      className="ml-2 text-xs text-indigo-600 hover:underline"
+      // Refactored line here:
+      onClick={() => { void handleSave(); }} // Use `void` to explicitly ignore the Promise return
+      className="ml-2 text-xs text-indigo-600 hover:underline disabled:opacity-50 disabled:cursor-not-allowed"
+      disabled={isSaving}
     >
-      Save
+      {isSaving ? 'Saving...' : 'Save'}
     </button>
   );
 }
 
 function Stars({ rating }: { rating: number }) {
   const filled = Math.floor(rating);
-  const half   = rating % 1 >= 0.5 ? 1 : 0;
-  const empty  = 5 - filled - half;
+  const half = rating % 1 >= 0.5 ? 1 : 0;
+  const empty = 5 - filled - half;
 
   return (
     <span className="inline-flex">
       {Array.from({ length: filled }).map((_, i) => <Star key={`f${i}`} size={16} />)}
       {half === 1 && <StarHalf size={16} />}
       {Array.from({ length: empty }).map((_, i) => (
-        <StarOutline key={`o${i}`} size={16} className="opacity-40" />
+        // Use Star directly, applying opacity for outlined appearance
+        <Star key={`o${i}`} size={16} className="opacity-40" />
       ))}
     </span>
   );

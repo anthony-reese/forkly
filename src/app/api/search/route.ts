@@ -1,19 +1,27 @@
 // src/app/api/search/route.ts
 import { NextResponse } from 'next/server';
-import { v4 as uuidv4 } from 'uuid';
+import {
+  Business,
+  FoursquarePlaceDetails,
+  FoursquareErrorResponse,
+  transformFoursquarePlaceToBusiness
+} from '@/lib/foursquareCached';
 
-interface Business {
-  id: string;
+interface FoursquareSearchPlaceResult {
+  fsq_id: string;
   name: string;
-  rating: number;
-  price?: string;
-  category: string;
-  photoUrl?: string;
+  rating?: number;
+  price?: number;
+  categories?: { id: string; name: string; icon?: { prefix: string; suffix: string } }[];
+  photos?: { id: string; prefix: string; suffix: string }[];
+}
+
+interface FoursquareSearchApiResponse {
+  results: FoursquareSearchPlaceResult[];
 }
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
-
   const term = searchParams.get('term') ?? 'restaurants';
   const location = searchParams.get('location');
   const latitude = searchParams.get('latitude');
@@ -37,7 +45,6 @@ export async function GET(req: Request) {
   }
 
   const url = new URL('https://places-api.foursquare.com/places/search');
-
   url.searchParams.set('query', term);
   url.searchParams.set('limit', limit);
   url.searchParams.set('offset', offset);
@@ -47,7 +54,7 @@ export async function GET(req: Request) {
   } else {
     url.searchParams.set('near', location!);
   }
-  
+
   if (price) url.searchParams.set('min_price', price);
   if (price) url.searchParams.set('max_price', price);
   if (categories) url.searchParams.set('categories', categories);
@@ -62,40 +69,38 @@ export async function GET(req: Request) {
       },
     });
 
-    const json = await res.json();
-
     if (!res.ok) {
-      console.error('Foursquare API Error Response:', json);
-      const errorMessage = json.message || 'Unknown Foursquare API error';
-      return NextResponse.json({ error: `Foursquare API Error: ${errorMessage}` }, { status: res.status });
+      const errorJson = (await res.json()) as FoursquareErrorResponse;
+      console.error('Foursquare API Error Response:', errorJson);
+      const errorMessage = errorJson.message || 'Unknown Foursquare API error';
+      return NextResponse.json(
+        { error: `Foursquare API Error: ${errorMessage}` },
+        { status: res.status }
+      );
     }
 
-    const businesses: Business[] = json.results.map((place: any) => {
-      const scaledRating = place.rating ? (place.rating / 2) : 0;
-      const displayPrice = place.price ? '$'.repeat(place.price) : undefined;
+    const json = (await res.json()) as FoursquareSearchApiResponse;
 
-      const primaryCategory = place.categories && place.categories.length > 0
-                              ? place.categories[0].name
-                              : 'Uncategorized';
+    if (!json.results || !Array.isArray(json.results)) {
+      console.error('Foursquare API response is missing "results" array or it is not an array:', json);
+      return NextResponse.json(
+        { error: 'Foursquare API returned an unexpected response format.' },
+        { status: 500 }
+      );
+    }
 
-      const photoUrl = place.photos && place.photos.length > 0
-                       ? `${place.photos[0].prefix}original${place.photos[0].suffix}`
-                       : (place.categories && place.categories[0]?.icon ? `${place.categories[0].icon.prefix}bg_64${place.categories[0].icon.suffix}` : '/placeholder.png');
-
-      return {
-        id: place.fsq_id ?? uuidv4(),
-        name: place.name,
-        rating: scaledRating,
-        price: displayPrice,
-        category: primaryCategory,
-        photoUrl: photoUrl,
-      };
+    const businesses: Business[] = json.results.map((placeResult: FoursquareSearchPlaceResult) => {
+      return transformFoursquarePlaceToBusiness(placeResult as FoursquarePlaceDetails);
     });
 
     return NextResponse.json({ businesses });
 
-  } catch (err) {
+  } catch (err: unknown) {
     console.error('Error in Foursquare API search route:', err);
-    return NextResponse.json({ error: 'Failed to fetch places from Foursquare' }, { status: 500 });
+    const errorMessage = err instanceof Error ? err.message : String(err);
+    return NextResponse.json(
+      { error: `Failed to fetch places from Foursquare. Details: ${errorMessage}` },
+      { status: 500 }
+    );
   }
 }

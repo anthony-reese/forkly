@@ -1,4 +1,3 @@
-// src/lib/firebase.ts
 import { initializeApp, getApps } from 'firebase/app';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
@@ -13,13 +12,14 @@ const firebaseConfig = {
 };
 
 const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+export const auth = getAuth(app);
 
-export const auth   = getAuth(app);
-
-if (typeof window !== 'undefined' && (window as any).Cypress) {
-  // @ts-ignore - We're intentionally adding to window
-  (window as any).firebase_auth_instance = auth;
+// Check if window is defined (for client-side rendering) and if Cypress is running
+if (typeof window !== 'undefined' && window.Cypress) {
+  // Now, TypeScript knows about `firebase_auth_instance` and `Cypress` on `window`
+  window.firebase_auth_instance = auth;
   console.log('Firebase auth instance exposed to window for Cypress.');
 }
+
 export const google = new GoogleAuthProvider();
-export const db     = getFirestore(app);
+export const db = getFirestore(app);

@@ -1,7 +1,7 @@
 // src/components/SearchBar.tsx
 'use client';
 import { useState } from 'react';
-import { useGeoPosition } from '@/hooks/useGeoPosition';
+import { useGeoPosition } from '@/hooks/useGeoPosition'; // Assuming this hook exists and is correct
 
 interface Props {
   onSearch: (query: string, location: string) => void;
@@ -18,7 +18,7 @@ export default function SearchBar({
 }: Props) {
   const [query, setQuery] = useState(initialQuery);
   const [location, setLocation] = useState(initialLocation);
-  const { coords, request } = useGeoPosition();
+  const { coords, request } = useGeoPosition(); // Assuming request is an async function
 
   return (
     <div className="flex flex-col sm:flex-row gap-2">
@@ -45,9 +45,19 @@ export default function SearchBar({
         Search
       </button>
       <button
-        onClick={async () => {
-          if (!coords) await request();
-          if (coords) onLocate(coords.latitude, coords.longitude, query);
+        // Refactored lines 48-51:
+        onClick={() => {
+          // Use `void` to explicitly tell TypeScript/ESLint that the returned Promise
+          // from this async IIFE is intentionally not handled/awaited here.
+          void (async () => {
+            if (!coords) {
+              await request(); // request() is presumably async and returns a Promise
+            }
+            // After request() might have updated coords, check again
+            if (coords) { // Still rely on the `coords` state directly from the hook
+              onLocate(coords.latitude, coords.longitude, query);
+            }
+          })(); // Immediately Invoked Async Function Expression
         }}
         className="h-10 px-3 bg-emerald-600 text-white rounded"
       >

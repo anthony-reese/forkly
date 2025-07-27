@@ -1,72 +1,56 @@
 // eslint.config.mjs
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
-import globals from "globals";
 import pluginJs from "@eslint/js";
 import tseslint from "typescript-eslint";
+import globals from "globals";
+import { FlatCompat } from "@eslint/eslintrc";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 import cypressPlugin from "eslint-plugin-cypress/flat";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const compat = new FlatCompat({ baseDirectory: __dirname });
 
 export default tseslint.config(
-  pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
-
   {
-    files: ["src/**/*.{ts,tsx,js,jsx}"],
+    files: ["**/*.ts", "**/*.tsx"],
     languageOptions: {
-      parser: tseslint.parser,
       parserOptions: {
-        project: true,
-        tsconfigRootDir: import.meta.dirname,
+        project: "./tsconfig.json",
+        tsconfigRootDir: __dirname,
       },
-      globals: {
-        ...globals.browser,
-      },
-    },
-    rules: {
+      globals: globals.browser,
     },
   },
 
+  ...tseslint.configs.recommendedTypeChecked,
+
   {
-    files: ["cypress/e2e/**/*.cy.{js,ts,jsx,tsx}"],
+    files: ["**/*.js"],
+    languageOptions: {
+      globals: globals.node,
+    },
+    rules: pluginJs.configs.recommended.rules,
+  },
+
+  {
+    files: ["cypress/**/*.ts", "cypress/**/*.js"],
     plugins: {
       cypress: cypressPlugin,
     },
     languageOptions: {
-      parser: tseslint.parser,
-      parserOptions: {
-        project: true,
-        tsconfigRootDir: import.meta.dirname,
-      },
-      globals: {
-        ...globals.browser,
-        ...cypressPlugin.configs.globals.languageOptions.globals,
-      },
+      globals: globals.browser,
+       ...globals.node,
+       'Cypress': true,
+       'cy': true,
+       'expect': true,
+       'assert': true,
     },
     rules: {
       ...cypressPlugin.configs.recommended.rules,
-
-      "no-unused-expressions": "off",
-
-      "@typescript-eslint/no-unused-expressions": [
-        "error",
-        {
-          "allowShortCircuit": true,
-          "allowTernary": true,
-          "allowTaggedTemplates": true,
-          "enforceForJSX": true,
-          "allowSimpleAssign": true,
-          "allowTemplateLiterals": true,
-          "allowVoid": true
-        }
-      ],
+      'no-unused-expressions': 'off',
+      '@typescript-eslint/no-unused-expressions': 'off',
     },
   },
+
+  ...compat.extends("next/core-web-vitals", "next")
 );
