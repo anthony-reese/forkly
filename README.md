@@ -1,5 +1,5 @@
 # Forkly
-Discover and save your favorite local restaurants — powered by Yelp, built with Next.js, Firebase, and Tailwind.
+Discover and save your favorite local restaurants — powered by Foursquare built with Next.js, Firebase, and Tailwind.
 
 ![Screenshot of Forkly restaurant search UI](./public/screenshot.png)
 
@@ -7,7 +7,7 @@ Discover and save your favorite local restaurants — powered by Yelp, built wit
 
 - Search restaurants by location, category, or price
 - Save to your wishlist (with Firebase Auth)
-- Live data from Yelp Fusion API
+- Live data from Foursquare Places API
 - Fast UI with Tailwind CSS and caching
 
 ## Tech stack
@@ -15,7 +15,7 @@ Discover and save your favorite local restaurants — powered by Yelp, built wit
 - Tailwind
 - Firebase Auth
 - Firestore
-- Yelp Fusion
+- Foursquare Places
 
 ## Firestore Schema
 
@@ -26,7 +26,7 @@ displayName, email, createdAt
 
 wishlists/{uid}/items/{bizId}
 addedAt
-snapshot (optional Yelp fields cache)
+snapshot (optional Foursquare fields cache)
 
 restaurants/{bizId} (optional central cache)
 name, price, rating, category, lastFetched
@@ -42,7 +42,7 @@ Explore our current test endpoints using Postman:
 git clone https://github.com/yourusername/forkly.git
 cd forkly
 npm install
-# Add Yelp + Firebase keys to .env.local
+# Add Foursquare Places + Firebase keys to .env.local
 npm run dev
 ```
 
