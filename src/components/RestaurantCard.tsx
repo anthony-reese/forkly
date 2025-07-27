@@ -72,8 +72,9 @@ export default function RestaurantCard({
         <Image
           src={photoUrl ?? '/placeholder.png'}
           alt={name}
-          fill
+          fill={true}
           className="rounded-t-xl object-cover"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
       </div>
 

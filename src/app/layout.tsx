@@ -4,6 +4,7 @@ import "./globals.css";
 import AuthProvider from '@/components/AuthProvider';
 import Header from '@/components/Header';
 import { Toaster } from 'react-hot-toast';
+import { auth } from '@/lib/firebase';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

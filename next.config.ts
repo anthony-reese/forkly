@@ -5,7 +5,11 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 's3-media*.fl.yelpcdn.com',
+        hostname: 's3-media*.fl.foursquarecdn.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'ss3.4sqi.net',
       },
     ],
   },

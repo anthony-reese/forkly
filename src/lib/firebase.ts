@@ -15,5 +15,11 @@ const firebaseConfig = {
 const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
 
 export const auth   = getAuth(app);
+
+if (typeof window !== 'undefined' && (window as any).Cypress) {
+  // @ts-ignore - We're intentionally adding to window
+  (window as any).firebase_auth_instance = auth;
+  console.log('Firebase auth instance exposed to window for Cypress.');
+}
 export const google = new GoogleAuthProvider();
 export const db     = getFirestore(app);

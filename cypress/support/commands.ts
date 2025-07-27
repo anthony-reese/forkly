@@ -1,3 +1,4 @@
+// cypress/support/commands.ts
 /// <reference types="cypress" />
 // ***********************************************
 // This example commands.ts shows you how to
@@ -9,29 +10,65 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************
 //
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-//
-// declare global {
-//   namespace Cypress {
-//     interface Chainable {
-//       login(email: string, password: string): Chainable<void>
-//       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
-//     }
-//   }
-// }
+// @ts-check
+
+Cypress.Commands.add('login', (mockUser = { uid: 'mockUserId123', email: 'test@example.com', displayName: 'Test User' }) => {
+  cy.window().then((win) => {
+    if (!win.Cypress || !win.firebase_auth_instance) {
+      throw new Error("Firebase 'auth' instance not found on window. Ensure it's exposed for testing.");
+    }
+
+    const authInstance = win.firebase_auth_instance;
+
+    const onAuthStateChangedStub = cy.stub(authInstance, 'onAuthStateChanged').callsFake((callback) => {
+      callback(mockUser as any); 
+
+      return () => {
+      };
+    }).as('onAuthStateChangedStub');
+
+    cy.wait(50);
+  });
+});
+
+Cypress.Commands.add('logout', () => {
+  cy.window().then((win) => {
+    if (!win.Cypress || !win.firebase_auth_instance) {
+      return;
+    }
+
+    const authInstance = win.firebase_auth_instance;
+
+    const onAuthStateChanged = authInstance.onAuthStateChanged as 
+      ((callback: (user: any) => void) => void) & { restore?: () => void };
+
+    if (onAuthStateChanged.restore) {
+      onAuthStateChanged.restore();
+    }
+
+    cy.stub(authInstance, 'onAuthStateChanged')
+      .callsFake((callback) => {
+        callback(null);
+        return () => {}; // unsub
+      })
+      .as('onAuthStateChangedLogoutStub');
+
+    cy.wait(50);
+  });
+});
+
+declare namespace Cypress {
+  interface Chainable {
+    /**
+     * Custom command to 'login' a user by mocking Firebase's onAuthStateChanged.
+     * @example cy.login()
+     * @example cy.login({ uid: 'anotherId', email: 'another@example.com' })
+     */
+    login(user?: { uid: string; email: string; displayName?: string }): Chainable<AUTWindow>;
+    /**
+     * Custom command to 'logout' a user by mocking Firebase's onAuthStateChanged to null.
+     * @example cy.logout()
+     */
+    logout(): Chainable<AUTWindow>;
+  }
+}
