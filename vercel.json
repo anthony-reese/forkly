@@ -16,6 +16,5 @@
   ],
   "installCommand": "npm install",
   "buildCommand": "npm run build:frontend",
-  "outputDirectory": "frontend/.next",
-  "root": "frontend"
+  "outputDirectory": "frontend/.next"
 }
