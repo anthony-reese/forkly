@@ -1,47 +1,22 @@
 {
-  "name": "forkly",
-  "version": "0.1.0",
+  "name": "forkly-monorepo",
+  "version": "1.0.0",
   "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@headlessui/react": "^2.2.4",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "firebase": "^11.10.0",
-    "lucide-react": "^0.525.0",
-    "next": "15.3.4",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-hot-toast": "^2.5.2",
-    "tailwind-merge": "^3.3.1",
-    "uuid": "^11.1.0"
+    "dev:frontend": "npm run dev --workspace frontend",
+    "build:frontend": "npm run build --workspace frontend",
+    "lint:frontend": "npm run lint --workspace frontend",
+    "start:frontend": "npm run start --workspace frontend",
+
+    "build:backend": "npm run build --workspace backend",
+    "serve:backend": "firebase emulators:start --only functions",
+    "deploy:backend": "firebase deploy --only functions"
   },
   "devDependencies": {
-    "@cypress/react": "^9.0.1",
-    "@eslint/eslintrc": "^3",
-    "@testing-library/react": "^16.3.0",
-    "@types/jest": "^30.0.0",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@typescript-eslint/eslint-plugin": "^8.38.0",
-    "@typescript-eslint/parser": "^8.38.0",
-    "autoprefixer": "^10.4.21",
-    "cypress": "^14.5.1",
-    "eslint": "^9.32.0",
-    "eslint-config-next": "15.3.4",
-    "eslint-plugin-cypress": "^5.1.0",
-    "postcss": "^8.5.6",
-    "stylelint": "^16.21.0",
-    "stylelint-config-tailwindcss": "^1.0.0",
-    "tailwindcss": "^3.4.17",
-    "tailwindcss-animate": "^1.0.7",
-    "typescript": "^5.8.3",
-    "typescript-eslint": "^8.38.0"
+    "firebase-tools": "^13.0.0"
   }
 }
