@@ -1,6 +1,6 @@
 // src/app/api/restaurant/route.ts
 import { NextResponse } from 'next/server';
-import { getBusinessCached } from '@/lib/foursquareCached';
+import { getBusinessCached } from 'src/lib/foursquareCached';
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
