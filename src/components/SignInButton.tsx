@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { signInWithPopup, signOut } from 'firebase/auth';
 import { auth, google } from '@/lib/firebase';
 import { useUser } from './AuthProvider';
-import { toast } from 'react-hot-toast'; // Assuming you have toast imported
-import { FirebaseError } from 'firebase/app'; // Import FirebaseError (usually from firebase/app)
+import { toast } from 'react-hot-toast'; 
+import { FirebaseError } from 'firebase/app'; 
 
 export default function SignInButton() {
   const { user, loading: authLoading } = useUser();
@@ -43,17 +43,12 @@ export default function SignInButton() {
     setIsSigningIn(true);
     try {
       await signInWithPopup(auth, google);
-      // Optional: toast.success('Signed in successfully!');
-      setOpen(false); // Close the dialog on successful sign-in
-    } catch (error: unknown) { // Best practice to type catch block as unknown
+      setOpen(false);
+    } catch (error: unknown) {
       console.error('Error during Google sign-in:', error);
 
-      // Refactored line here:
       if (error instanceof FirebaseError && error.code === 'auth/popup-closed-by-user') {
-        // Handle popup-closed-by-user specifically (e.g., no toast, or a different message)
-        // toast.error('Sign-in cancelled.');
       } else {
-        // Provide a general error message for other Firebase errors or unknown errors
         const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred.';
         toast.error(`Sign-in failed: ${errorMessage}`);
       }

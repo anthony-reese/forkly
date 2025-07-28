@@ -1,37 +1,26 @@
 // src/lib/searchClient.ts
+import { Business } from './foursquareCached';
 
-// Make sure your Business interface is accessible, e.g.:
-import { Business } from './foursquareCached'; // Or from a central types file
-
-// Your existing SearchParams interface
 export interface SearchParams {
   term?: string;
   location?: string;
   latitude?: number;
   longitude?: number;
-  price?: string; // Consider if this should be a number or string based on API
+  price?: string;
   categories?: string;
   limit?: number;
   offset?: number;
 }
 
-// --- New: Define API Response Interfaces ---
-
-// Interface for a successful search API response
-// Adjust 'businesses' property name and type if your API returns something different
 export interface SearchApiResponse {
-  businesses: Business[]; // Assuming 'Business' interface is defined elsewhere
-  // Add other properties if your API response includes them (e.g., total, region)
+  businesses: Business[]; 
   total?: number;
 }
 
-// Interface for an API error response
-// Adjust 'error' property name and type if your API returns something different for errors
 interface SearchApiErrorResponse {
-  error?: string; // Common for a simple error message
-  message?: string; // Some APIs use 'message' for errors
+  error?: string;
+  message?: string;
   statusCode?: number;
-  // Add other properties if your API error response includes them
 }
 
 /**
@@ -56,18 +45,16 @@ export async function searchFoursquare(params: SearchParams): Promise<Business[]
   if (!res.ok) {
     let errorMessage = `API error: ${res.status} ${res.statusText}`;
     try {
-      // Explicitly type the error response body
       const errorBody = (await res.json()) as SearchApiErrorResponse;
 
-      // Access properties safely using optional chaining or nullish coalescing
       if (errorBody?.error) {
         errorMessage += ` - Details: ${errorBody.error}`;
-      } else if (errorBody?.message) { // Check for a 'message' property
+      } else if (errorBody?.message) {
         errorMessage += ` - Details: ${errorBody.message}`;
-      } else if (Object.keys(errorBody).length > 0) { // Fallback if no specific error property but object exists
+      } else if (Object.keys(errorBody).length > 0) {
         errorMessage += ` - Body: ${JSON.stringify(errorBody)}`;
       }
-    } catch (e: unknown) { // Use 'unknown' for catch block errors
+    } catch (e: unknown) {
       console.warn("searchFoursquare: Could not parse error response body as JSON.", e);
       errorMessage += ` - Could not parse error response body. Original error: ${e instanceof Error ? e.message : String(e)}`;
     }
@@ -76,18 +63,15 @@ export async function searchFoursquare(params: SearchParams): Promise<Business[]
   }
 
   try {
-    // Explicitly type the successful data response
     const data = (await res.json()) as SearchApiResponse;
     console.log("searchFoursquare: Received data:", data);
 
-    // Ensure data.businesses exists and is an array before returning
     if (!data.businesses || !Array.isArray(data.businesses)) {
       throw new Error("API response is missing 'businesses' array or it's not an array.");
     }
     return data.businesses;
-  } catch (e: unknown) { // Use 'unknown' for catch block errors
+  } catch (e: unknown) { 
     console.error("searchFoursquare: Error parsing JSON response:", e);
-    // Safely access error message
     const errorMessage = e instanceof Error ? e.message : String(e);
     throw new Error("Invalid JSON response from API. Details: " + errorMessage);
   }

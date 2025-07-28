@@ -1,6 +1,5 @@
 // src/app/wishlist/page.tsx
 'use client';
-// Removed 'query' and 'where' as they are not used in the current code
 import { collection, onSnapshot } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from '@/lib/firebase';

@@ -1,11 +1,11 @@
 // src/components/RestaurantCard.tsx
 import Image from 'next/image';
-import { Star, StarHalf } from 'lucide-react'; // Simplified Star import
-import { priceColor } from '@/app/helpers/priceColor'; // Refactored import path
+import { Star, StarHalf } from 'lucide-react';
+import { priceColor } from '@/app/helpers/priceColor';
 import { toast } from 'react-hot-toast';
 import { addToWishlist } from '@/lib/wishlist';
 import { useUser } from './AuthProvider';
-import { useState } from 'react'; // Import useState for local loading state
+import { useState } from 'react';
 
 type Props = {
   id: string;
@@ -39,8 +39,7 @@ function SaveButton({ bizId }: { bizId: string }) {
 
   return (
     <button
-      // Refactored line here:
-      onClick={() => { void handleSave(); }} // Use `void` to explicitly ignore the Promise return
+      onClick={() => { void handleSave(); }}
       className="ml-2 text-xs text-indigo-600 hover:underline disabled:opacity-50 disabled:cursor-not-allowed"
       disabled={isSaving}
     >
@@ -59,7 +58,6 @@ function Stars({ rating }: { rating: number }) {
       {Array.from({ length: filled }).map((_, i) => <Star key={`f${i}`} size={16} />)}
       {half === 1 && <StarHalf size={16} />}
       {Array.from({ length: empty }).map((_, i) => (
-        // Use Star directly, applying opacity for outlined appearance
         <Star key={`o${i}`} size={16} className="opacity-40" />
       ))}
     </span>

@@ -1,15 +1,15 @@
-// D:\forkly\functions\src\index.ts
+// functions/src/index.ts
 import { defineSecret } from 'firebase-functions/params';
 import { onDocumentCreated } from 'firebase-functions/v2/firestore';
 import { Resend } from 'resend';
 import { render } from '@react-email/render';
 import { PromoEmail } from './templates/PromoEmail';
 import * as admin from 'firebase-admin';
+import * as FirebaseFirestore from 'firebase-admin/firestore';
 import React from 'react';
 import webpush from 'web-push';
 import { Expo } from 'expo-server-sdk';
 
-// Define Secrets at the top level
 const resendApiKey = defineSecret('RESEND_KEY');
 const webPushPublicKey = defineSecret('WEB_PUSH_PUBLIC_KEY');
 const webPushPrivateKey = defineSecret('WEB_PUSH_PRIVATE_KEY');
@@ -25,8 +25,8 @@ export const emailPromo = onDocumentCreated(
   },
   async (event) => {
     const { uid, bizId } = event.params;
-
     const resend = new Resend(resendApiKey.value());
+
     webpush.setVapidDetails(
       'mailto:support@forkly.app',
       webPushPublicKey.value(),
@@ -35,7 +35,7 @@ export const emailPromo = onDocumentCreated(
 
     const itemRef = admin.firestore().doc(`wishlists/${uid}/items/${bizId}`);
     const itemSnap = await itemRef.get();
-    const lastNotified = itemSnap.get('lastNotified');
+    const lastNotified = itemSnap.get('lastNotified') as FirebaseFirestore.Timestamp | undefined | null;
 
     if (lastNotified) {
       console.log(`Already notified for ${bizId}, skipping.`);
@@ -43,7 +43,7 @@ export const emailPromo = onDocumentCreated(
     }
 
     const userDoc = await admin.firestore().doc(`users/${uid}`).get();
-    const name = userDoc.get('name') || 'Friend';
+    const name = (userDoc.get('name') as string | undefined) || 'Friend';
     const email = userDoc.get('email') as string | undefined;
     const expoToken = userDoc.get('expoPushToken') as string | undefined;
     const webPushSubscription = userDoc.get('webPushSubscription') as webpush.PushSubscription | undefined;
@@ -92,7 +92,6 @@ export const emailPromo = onDocumentCreated(
         } catch (webPushError) {
           if (webPushError instanceof webpush.WebPushError && webPushError.statusCode === 410) {
             console.warn(`Web Push subscription for ${uid} is expired. Removing.`);
-            // TODO: Implement logic to remove the expired subscription from userDoc
           } else {
             console.error(`Failed to send Web Push to ${uid}:`, webPushError);
           }
@@ -100,11 +99,9 @@ export const emailPromo = onDocumentCreated(
       } else {
         console.log(`No Web Push subscription found for user ${uid}, skipping web push.`);
       }
-
-        await itemRef.update({
+      await itemRef.update({
         lastNotified: admin.firestore.FieldValue.serverTimestamp(),
       });
-
     } catch (error) {
       console.error('Failed to process promo notification:', error);
     }

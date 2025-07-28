@@ -64,12 +64,12 @@ export default function SearchPageClient() {
   const [mounted, setMounted] = useState(false); // New state variable
 
   useEffect(() => {
-    setMounted(true); // Set to true once the component mounts on the client
+    setMounted(true);
   }, []);
 
   // ---------------- effects ----------------
   const fetchResultsCore = useCallback(async (query: string, opts: FoursquareSearchOpts = {}) => {
-    setError(null); // Clear any previous errors at the start of a new search
+    setError(null);
     setLoading(true);
     try {
       console.log('fetchResultsCore: Preparing to search with query:', query, 'and opts:', opts);
@@ -81,21 +81,17 @@ export default function SearchPageClient() {
       });
       setResults(data);
       console.log('fetchResultsCore: Received successful data:', data);
-    } catch (err: unknown) { // Use 'unknown' for better type safety in catch
+    } catch (err: unknown) { 
       console.error('fetchResultsCore: Error during search operation:', err);
-      setResults([]); // Clear results on error
-      // --- FIX: Use setError here ---
+      setResults([]);
       setError(`Search failed: ${err instanceof Error ? err.message : String(err)}`);
     } finally {
-      setLoading(false); // Always clear loading state
+      setLoading(false);
     }
-  }, [selectedPrices, selectedCats]); // Dependencies for useCallback: selectedPrices, selectedCats
+  }, [selectedPrices, selectedCats]);
 
   const debouncedFetchResults = useRef(
     debounce((query: string, opts?: FoursquareSearchOpts) => {
-      // The promise returned by fetchResultsCore is handled internally
-      // by its try...catch block, so `void` operator is appropriate here
-      // to explicitly indicate we're not awaiting or chaining further.
       void fetchResultsCore(query, opts);
     }, 500)
   ).current;
@@ -106,7 +102,6 @@ export default function SearchPageClient() {
     const currentPrices = params.getAll('price') || [];
     const currentCategories = params.getAll('categories') || [];
 
-    // Update states from URL params
     setQuery(currentQuery);
     setLocation(currentLocation);
     setSelectedPrices(currentPrices);
@@ -117,8 +112,8 @@ export default function SearchPageClient() {
 
     if (!currentQuery && !currentLocation && !params.get('latitude') && !params.get('longitude')) {
       console.log("useEffect: No search parameters found in URL, not initiating search.");
-      setResults([]); // Ensure results are clear if no search parameters
-      setError(null); // Ensure no old error is shown
+      setResults([]);
+      setError(null);
       return;
     }
 
@@ -132,15 +127,12 @@ export default function SearchPageClient() {
         opts.latitude = Number(params.get('latitude'));
         opts.longitude = Number(params.get('longitude'));
       }
-      // Calling the debounced function, which then calls fetchResultsCore
-      // The promise handling is inside fetchResultsCore, so `void` is okay here.
+      
       void debouncedFetchResults(currentQuery, opts);
     } else if (currentQuery && !hasLocationData) {
       console.log("useEffect: Term present but no location data. Not initiating full search.");
-      // You might want to display a message to the user here, e.g., "Please enter a location."
-      // setError('Please provide a location or enable location services to search.');
     }
-  }, [params, debouncedFetchResults]); // Dependencies: router is not needed as a dependency here if not directly used to trigger effect
+  }, [params, debouncedFetchResults]);
 
   // ---------------- handlers ----------------
   const togglePrice = (price: string) => {
@@ -149,14 +141,11 @@ export default function SearchPageClient() {
       : [...selectedPrices, price];
     setSelectedPrices(newPrices);
     const newParams = new URLSearchParams(params.toString());
-    // Clear all existing 'price' params before adding new ones
     params.getAll('price').forEach(p => newParams.delete('price', p));
     newPrices.forEach(p => newParams.append('price', p));
 
-    // Ensure query and location are preserved if they exist
     if (query) newParams.set('term', query);
     if (location) newParams.set('location', location);
-    // Preserve lat/lon if present
     if (params.get('latitude')) newParams.set('latitude', params.get('latitude')!);
     if (params.get('longitude')) newParams.set('longitude', params.get('longitude')!);
 
@@ -169,14 +158,11 @@ export default function SearchPageClient() {
       : [...selectedCats, category];
     setSelectedCats(newCats);
     const newParams = new URLSearchParams(params.toString());
-    // Clear all existing 'categories' params before adding new ones
     params.getAll('categories').forEach(c => newParams.delete('categories', c));
     newCats.forEach(c => newParams.append('categories', c));
 
-    // Ensure query and location are preserved if they exist
     if (query) newParams.set('term', query);
     if (location) newParams.set('location', location);
-    // Preserve lat/lon if present
     if (params.get('latitude')) newParams.set('latitude', params.get('latitude')!);
     if (params.get('longitude')) newParams.set('longitude', params.get('longitude')!);
 
@@ -196,7 +182,7 @@ export default function SearchPageClient() {
 
   const handleLocate = (lat: number, lon: number, newQuery: string) => {
     setQuery(newQuery);
-    setLocation(''); // Clear location text if using geo-coordinates
+    setLocation(''); 
     const newParams = new URLSearchParams();
     if (newQuery) newParams.set('term', newQuery);
     newParams.set('latitude', lat.toString());
@@ -217,7 +203,6 @@ export default function SearchPageClient() {
         initialQuery={query}
         initialLocation={location}
       />
-      {/* category/price filters */}
       <div className="my-6 flex gap-2 justify-center flex-wrap">
         {['1', '2', '3', '4'].map(p => (
           <button
@@ -245,17 +230,13 @@ export default function SearchPageClient() {
                         ${selectedCats.includes(cat.id)
                             ? 'bg-indigo-600 text-white'
                             : 'bg-gray-200 dark:bg-gray-700'}`}>
-            {cat.name} {/* Display the human-readable name */}
+            {cat.name}
           </button>
         ))}
       </div>
-      {/* results */}
-      {/* Conditionally render based on loading, errors, and results */}
       {loading && <p className="text-center py-10 text-gray-500">Loading…</p>}
-      {/* --- FIX: Display error message --- */}
       {error && <p className="text-center py-10 text-red-500">{error}</p>}
-      {/* This block handles showing the main results OR the "No results" message */}
-      {mounted && !loading && !error && ( // Only show results if not loading AND no error
+      {mounted && !loading && !error && (
         <>
           {results.length > 0 ? (
             <section className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
@@ -278,7 +259,6 @@ export default function SearchPageClient() {
           )}
         </>
       )}
-      {/* This placeholder only shows during the initial server-render before hydration */}
       {!mounted && <p className="text-center py-10 text-gray-500">Loading content...</p>}
     </main>
   );

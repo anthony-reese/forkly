@@ -14,9 +14,7 @@ const firebaseConfig = {
 const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
-// Check if window is defined (for client-side rendering) and if Cypress is running
 if (typeof window !== 'undefined' && window.Cypress) {
-  // Now, TypeScript knows about `firebase_auth_instance` and `Cypress` on `window`
   window.firebase_auth_instance = auth;
   console.log('Firebase auth instance exposed to window for Cypress.');
 }
