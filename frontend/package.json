@@ -1,5 +1,5 @@
 {
-  "name": "forkly",
+  "name": "forkly-frontend",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -43,5 +43,8 @@
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.38.0"
+  },
+  "engines": {
+    "node": "22"
   }
 }
