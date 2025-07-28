@@ -1,9 +1,0 @@
-{
-  "/api/restaurant/route": "/api/restaurant",
-  "/favicon.ico/route": "/favicon.ico",
-  "/api/search/route": "/api/search",
-  "/_not-found/page": "/_not-found",
-  "/api/foursquare/search/route": "/api/foursquare/search",
-  "/page": "/",
-  "/wishlist/page": "/wishlist"
-}
