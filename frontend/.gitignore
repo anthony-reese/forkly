@@ -1,0 +1,10 @@
+# env files (can opt-in for committing if needed)
+.env*
+.env.local
+
+# misc
+node_modules/
+.next/
+dist/
+*.log
+*.tsbuildinfo
