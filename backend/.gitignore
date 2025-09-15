@@ -11,3 +11,7 @@ node_modules/
 
 # next.js
 /.next/
+
+# Ignore Firebase admin keys
+backend/serviceAccountKey.json
+*.secret.json

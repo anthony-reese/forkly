@@ -8,3 +8,7 @@ node_modules/
 dist/
 *.log
 *.tsbuildinfo
+
+# Ignore Firebase admin keys
+backend/serviceAccountKey.json
+*.secret.json

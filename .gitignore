@@ -47,3 +47,7 @@ git
 dist/
 functions/.next/
 replacements.txt
+
+# Ignore Firebase admin keys
+backend/serviceAccountKey.json
+*.secret.json

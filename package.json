@@ -12,12 +12,14 @@
     "build:frontend": "npm run build --workspace frontend",
     "lint:frontend": "npm run lint --workspace frontend",
     "start:frontend": "npm run start --workspace frontend",
-
     "build:backend": "npm run build --workspace backend",
     "serve:backend": "firebase emulators:start --only functions",
     "deploy:backend": "firebase deploy --only functions"
   },
   "devDependencies": {
     "firebase-tools": "^13.0.0"
+  },
+  "dependencies": {
+    "firebase-admin": "^13.4.0"
   }
 }
