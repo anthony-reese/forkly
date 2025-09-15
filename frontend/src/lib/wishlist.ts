@@ -6,7 +6,6 @@ import {
   collection,
   getDocs,
   getDoc,
-  DocumentData,
 } from 'firebase/firestore';
 import { db } from './firebase';
 
@@ -21,7 +20,7 @@ export interface Restaurant {
 }
 
 // Firestore schema hint for restaurants
-interface RestaurantFirestoreData extends DocumentData {
+interface RestaurantFirestoreData {
   name?: unknown;
   rating?: unknown;
   price?: unknown;
