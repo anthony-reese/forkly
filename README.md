@@ -1,7 +1,7 @@
 # Forkly
 Discover and save your favorite local restaurants — powered by Foursquare built with Next.js, Firebase, and Tailwind.
 
-![Screenshot of Forkly restaurant search UI](./public/screenshot.png)
+![Screenshot of Forkly restaurant search UI](./frontend/public/screenshot.png)
 
 ## Features
 
