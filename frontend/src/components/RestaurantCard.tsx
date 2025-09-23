@@ -101,13 +101,13 @@ export default function RestaurantCard({
         />
       </div>
 
-      <div className="flex-1 p-3 flex flex-col justify-between">
+      <div className="flex-1 p-3 flex flex-col justify-between text-white">
         <div className="flex items-start">
           <h3 className="font-semibold flex-1">{name}</h3>
           <SaveButton restaurant={{ id, name, rating, price, category, photoUrl }} />
         </div>
 
-        <p className="text-sm text-zinc-300 mt-1">
+        <p className="text-sm text-zinc-100 mt-1">
           <Stars rating={rating} /> {rating.toFixed(1)} •{' '}
           <span className={priceColor(price) + ' dark:opacity-90'}>
             {price ?? '$$'}
