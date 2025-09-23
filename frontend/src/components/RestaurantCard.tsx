@@ -109,7 +109,7 @@ export default function RestaurantCard({
 
         <p className="text-sm text-zinc-100 mt-1">
           <Stars rating={rating} /> {rating.toFixed(1)} •{' '}
-          <span className={priceColor(price) + ' dark:opacity-90'}>
+          <span className={priceColor(price) + "dark:opacity-90"}>
             {price ?? '$$'}
           </span>
           {category ? <> • {category}</> : null}
