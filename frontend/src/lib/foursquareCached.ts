@@ -163,7 +163,7 @@ export async function getPhotoCached(fsq_place_id: string, apiKey: string): Prom
     }
 
     console.log(`[Cache Miss] Fetching photo for ${fsq_place_id}`);
-    const res = await fetch(`https://places-api.foursquare.com/places/${fsq_place_id}/photos`, {
+    const res = await fetch(`https://places-api.foursquare.com/places/search/${fsq_place_id}/photos`, {
       headers: {
         Accept: 'application/json',
         Authorization: `Bearer ${apiKey}`,
