@@ -3,6 +3,7 @@ import "./globals.css";
 import AuthProvider from '@/components/AuthProvider';
 import { Toaster } from 'react-hot-toast';
 import { Rubik } from "next/font/google";
+import SignInButton from '@/components/SignInButton';
 
 const rubik = Rubik({
   subsets: ["latin"],
@@ -36,8 +37,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <span className="text-xl font-semibold tracking-tight">Forkly</span>
               </div>
               <nav className="flex items-center gap-3">
-                <a className="text-sm text-zinc-300 hover:text-white" href="/wishlist">Wishlist</a>
-                <a className="btn-primary text-sm" href="/auth">Sign in</a>
+                <a className="text-sm text-zinc-300 hover:text-white" href="/wishlist">
+                  Wishlist
+                </a>
+                <SignInButton />
               </nav>
             </div>
           </header>

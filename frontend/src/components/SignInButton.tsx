@@ -1,4 +1,6 @@
 // src/components/SignInButton.tsx
+"use client";
+
 import { Dialog } from '@headlessui/react';
 import { useState } from 'react';
 import { signInWithPopup, signOut } from 'firebase/auth';
