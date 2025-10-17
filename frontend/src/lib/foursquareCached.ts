@@ -113,7 +113,7 @@ export async function getBusinessCached(id: string): Promise<Business> {
   }
 
   console.log(`[Firebase Cache Miss/Stale] Fetching business ${id} from Foursquare.`);
-  const url = `https://api.foursquare.com/places/${id}`;
+  const url = `https://places-api.foursquare.com/places/${id}`;
 
   try {
     const res = await fetch(url, {
@@ -148,28 +148,33 @@ export async function getBusinessCached(id: string): Promise<Business> {
 /**
  * Fetches and caches a Foursquare photo URL for a given place.
  */
-export async function getPhotoCached(fsq_id: string, apiKey: string): Promise<string | null> {
+export async function getPhotoCached(fsq_place_id: string, apiKey: string): Promise<string | null> {
   try {
-    const ref = doc(db, 'photoCache', fsq_id);
+    const ref = doc(db, 'photoCache', fsq_place_id);
     const snap = await getDoc(ref);
 
     // ✅ Return cached photo if it's still fresh
     if (snap.exists()) {
       const data = snap.data() as CachedPhotoData;
       if (Date.now() - data.cachedAt < PHOTO_TTL) {
-        console.log(`[Cache Hit] Photo for ${fsq_id}`);
+        console.log(`[Cache Hit] Photo for ${fsq_place_id}`);
         return data.photoUrl;
       }
     }
 
-    console.log(`[Cache Miss] Fetching photo for ${fsq_id}`);
-    const res = await fetch(`https://api.foursquare.com/v3/places/${fsq_id}/photos`, {
+    console.log(`[Cache Miss] Fetching photo for ${fsq_place_id}`);
+    const res = await fetch(`https://places-api.foursquare.com/places/${fsq_place_id}/photos`, {
       headers: {
         Accept: 'application/json',
         Authorization: `Bearer ${apiKey}`,
         'X-Places-Api-Version': '2025-06-17',
       },
     });
+
+    if (process.env.USE_PHOTO_FALLBACK === 'true') {
+      console.log(`[PhotoFallback] Skipping Foursquare photo fetch for ${fsq_place_id}`);
+      return '/placeholder.png';
+    }
 
     if (!res.ok) return null;
 
@@ -185,20 +190,19 @@ export async function getPhotoCached(fsq_id: string, apiKey: string): Promise<st
       if (typeof p.prefix === 'string' && typeof p.suffix === 'string') {
         const photoUrl = `${p.prefix}original${p.suffix}`;
 
-        // ✅ Cache the photo URL in Firestore
         await setDoc(ref, {
           photoUrl,
           cachedAt: Date.now(),
         });
 
-        console.log(`[Cache Set] Photo cached for ${fsq_id}`);
+        console.log(`[Cache Set] Photo cached for ${fsq_place_id}`);
         return photoUrl;
       }
     }
 
-    return null;
+    return '/placeholder.png';
   } catch (err) {
-    console.error(`Error fetching/caching photo for ${fsq_id}:`, err);
-    return null;
+    console.error(`[PhotoFetchError] ${fsq_place_id}:`, err);
+    return '/placeholder.png';
   }
 }
