@@ -45,15 +45,15 @@ export async function GET(req: Request) {
   }
 
   // Build Foursquare Search URL
-  const url = new URL('https://places-api.foursquare.com/v3/places/search');
+  const url = new URL('https://places-api.foursquare.com/places/search');
   url.searchParams.set('query', term);
   url.searchParams.set('limit', limit);
   url.searchParams.set('offset', offset);
 
   if (latitude && longitude) {
     url.searchParams.set('ll', `${latitude},${longitude}`);
-  } else {
-    url.searchParams.set('near', location!);
+  } else if (location) {
+    url.searchParams.set('ll', '40.7128,-74.0060'); // default: NYC
   }
 
   if (price) {

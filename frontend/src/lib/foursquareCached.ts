@@ -113,7 +113,7 @@ export async function getBusinessCached(id: string): Promise<Business> {
   }
 
   console.log(`[Firebase Cache Miss/Stale] Fetching business ${id} from Foursquare.`);
-  const url = `https://places-api.foursquare.com/places/${id}`;
+  const url = `https://api.foursquare.com/places/${id}`;
 
   try {
     const res = await fetch(url, {
@@ -163,7 +163,7 @@ export async function getPhotoCached(fsq_id: string, apiKey: string): Promise<st
     }
 
     console.log(`[Cache Miss] Fetching photo for ${fsq_id}`);
-    const res = await fetch(`https://places-api.foursquare.com/v3/places/${fsq_id}/photos`, {
+    const res = await fetch(`https://api.foursquare.com/v3/places/${fsq_id}/photos`, {
       headers: {
         Accept: 'application/json',
         Authorization: `Bearer ${apiKey}`,
