@@ -1,0 +1,24 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    match /restaurants/{id} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.token.admin == true;
+    }
+
+    match /wishlists/{userId}/items/{itemId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    match /photoCache/{fsqId} {
+      allow get, list: if true;
+      allow create, update, delete: if
+        request.auth == null && request.time < timestamp.date(2030, 1, 1);
+    }
+  }
+}

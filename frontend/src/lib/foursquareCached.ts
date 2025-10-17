@@ -3,7 +3,7 @@ import { getDoc, doc, setDoc } from 'firebase/firestore';
 import { db } from './firebase';
 import { v4 as uuidv4 } from 'uuid';
 
-const TTL = 1000 * 60 * 60 * 24 * 7;
+const PHOTO_TTL = 1000 * 60 * 60 * 24 * 7;
 
 interface FoursquareIcon {
   prefix: string;
@@ -54,6 +54,11 @@ export interface FoursquareErrorResponse {
   message: string;
 }
 
+interface CachedPhotoData {
+  photoUrl: string;
+  cachedAt: number;
+}
+
 /**
  * Transforms a Foursquare Place API response object into your internal Business interface.
  * @param place The Foursquare Place details object.
@@ -101,7 +106,7 @@ export async function getBusinessCached(id: string): Promise<Business> {
 
   if (snap.exists()) {
     const data = snap.data() as CachedBusinessData;
-    if (data.lastFetched && (Date.now() - data.lastFetched < TTL)) {
+    if (data.lastFetched && (Date.now() - data.lastFetched < PHOTO_TTL)) {
       console.log(`[Firebase Cache Hit] Returning business ${id} from cache.`);
       return data as Business;
     }
@@ -137,5 +142,63 @@ export async function getBusinessCached(id: string): Promise<Business> {
     console.error(`Error fetching or transforming business ${id}:`, error);
     const errorMessage = error instanceof Error ? error.message : String(error);
     throw new Error(`Failed to fetch business details from Foursquare. Details: ${errorMessage}`);
+  }
+}
+
+/**
+ * Fetches and caches a Foursquare photo URL for a given place.
+ */
+export async function getPhotoCached(fsq_id: string, apiKey: string): Promise<string | null> {
+  try {
+    const ref = doc(db, 'photoCache', fsq_id);
+    const snap = await getDoc(ref);
+
+    // ✅ Return cached photo if it's still fresh
+    if (snap.exists()) {
+      const data = snap.data() as CachedPhotoData;
+      if (Date.now() - data.cachedAt < PHOTO_TTL) {
+        console.log(`[Cache Hit] Photo for ${fsq_id}`);
+        return data.photoUrl;
+      }
+    }
+
+    console.log(`[Cache Miss] Fetching photo for ${fsq_id}`);
+    const res = await fetch(`https://places-api.foursquare.com/v3/places/${fsq_id}/photos`, {
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${apiKey}`,
+        'X-Places-Api-Version': '2025-06-17',
+      },
+    });
+
+    if (!res.ok) return null;
+
+    type FoursquarePhoto = {
+      prefix: string;
+      suffix: string;
+    };
+
+    const data: unknown = await res.json();
+
+    if (Array.isArray(data) && data.length > 0) {
+      const p = data[0] as Partial<FoursquarePhoto>;
+      if (typeof p.prefix === 'string' && typeof p.suffix === 'string') {
+        const photoUrl = `${p.prefix}original${p.suffix}`;
+
+        // ✅ Cache the photo URL in Firestore
+        await setDoc(ref, {
+          photoUrl,
+          cachedAt: Date.now(),
+        });
+
+        console.log(`[Cache Set] Photo cached for ${fsq_id}`);
+        return photoUrl;
+      }
+    }
+
+    return null;
+  } catch (err) {
+    console.error(`Error fetching/caching photo for ${fsq_id}:`, err);
+    return null;
   }
 }

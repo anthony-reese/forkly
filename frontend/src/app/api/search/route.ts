@@ -1,10 +1,10 @@
-// src/app/api/search/route.ts
 import { NextResponse } from 'next/server';
 import {
   Business,
   FoursquarePlaceDetails,
   FoursquareErrorResponse,
-  transformFoursquarePlaceToBusiness
+  transformFoursquarePlaceToBusiness,
+  getPhotoCached, 
 } from '@/lib/foursquareCached';
 
 interface FoursquareSearchPlaceResult {
@@ -40,11 +40,12 @@ export async function GET(req: Request) {
 
   const FOURSQUARE_API_KEY = process.env.FOURSQUARE_API_KEY;
   if (!FOURSQUARE_API_KEY) {
-    console.error('FOURSQUARE_API_KEY is UNDEFINED on the server. Check .env.local and server restart.');
+    console.error('FOURSQUARE_API_KEY is UNDEFINED on the server. Check .env.local and restart.');
     return NextResponse.json({ error: 'Server API key not configured' }, { status: 500 });
   }
 
-  const url = new URL('https://places-api.foursquare.com/places/search');
+  // Build Foursquare Search URL
+  const url = new URL('https://places-api.foursquare.com/v3/places/search');
   url.searchParams.set('query', term);
   url.searchParams.set('limit', limit);
   url.searchParams.set('offset', offset);
@@ -55,8 +56,10 @@ export async function GET(req: Request) {
     url.searchParams.set('near', location!);
   }
 
-  if (price) url.searchParams.set('min_price', price);
-  if (price) url.searchParams.set('max_price', price);
+  if (price) {
+    url.searchParams.set('min_price', price);
+    url.searchParams.set('max_price', price);
+  }
   if (categories) url.searchParams.set('categories', categories);
 
   try {
@@ -75,32 +78,39 @@ export async function GET(req: Request) {
       const errorMessage = errorJson.message || 'Unknown Foursquare API error';
       return NextResponse.json(
         { error: `Foursquare API Error: ${errorMessage}` },
-        { status: res.status }
+        { status: res.status },
       );
     }
 
     const json = (await res.json()) as FoursquareSearchApiResponse;
 
     if (!json.results || !Array.isArray(json.results)) {
-      console.error('Foursquare API response is missing "results" array or it is not an array:', json);
+      console.error('Foursquare API response missing "results" array:', json);
       return NextResponse.json(
         { error: 'Foursquare API returned an unexpected response format.' },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
-    const businesses: Business[] = json.results.map((placeResult: FoursquareSearchPlaceResult) => {
-      return transformFoursquarePlaceToBusiness(placeResult as FoursquarePlaceDetails);
-    });
+    // Fetch cached or fresh photos in parallel
+    const businesses: (Business & { photoUrl?: string })[] = await Promise.all(
+      json.results.map(async (placeResult: FoursquareSearchPlaceResult) => {
+        const business = transformFoursquarePlaceToBusiness(placeResult as FoursquarePlaceDetails);
+
+        // Try Firestore cache first, then fallback to API if not cached
+        const photoUrl = await getPhotoCached(placeResult.fsq_id, FOURSQUARE_API_KEY);
+
+        return { ...business, photoUrl: photoUrl ?? '/placeholder.png' };
+      }),
+    );
 
     return NextResponse.json({ businesses });
-
   } catch (err: unknown) {
     console.error('Error in Foursquare API search route:', err);
     const errorMessage = err instanceof Error ? err.message : String(err);
     return NextResponse.json(
       { error: `Failed to fetch places from Foursquare. Details: ${errorMessage}` },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
